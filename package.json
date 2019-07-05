@@ -1,0 +1,16 @@
+{
+  "name": "ag-vtt",
+  "version": "0.1.0",
+  "description": "A Virtual Table Top implementation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "andrea.giancola@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  }
+}
