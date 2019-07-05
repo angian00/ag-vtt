@@ -1,0 +1,35 @@
+
+virtual tabletop implementation:
+- hello world websockets
+- esplorare uso con react
+- esplorare librerie js gaming/canvas
+	- konva
+	
+- cattura eventi input (drag & drop, chat)
+- design protocollo comunicaz
+	- eventi grafici
+		- animazioni
+	- chat
+	- tiro dadi
+
+
+## Milestones
+### v0.1
+- mappa fissa + token draggabile
+- fog of war
+- (movimento solo su griglia discreta?)
+
+### v0.2
+- gestione dinamica
+	- comparsa nuovi token
+	- authorization utenti
+
+- combattimento
+	- effetti grafici
+	- statistiche PC
+	- layout schermo
+		- chat
+
++ editor occlusioni per fog-of-war
++ gestione libreria token
++ azioni; macro; stats PC; ruleset RPG noti
