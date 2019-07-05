@@ -1,7 +1,6 @@
 
-virtual tabletop implementation:
-- hello world websockets
-- esplorare uso con react
+v hello world websockets
+v esplorare uso con react
 - esplorare librerie js gaming/canvas
 	- konva
 	
@@ -15,6 +14,9 @@ virtual tabletop implementation:
 
 ## Milestones
 ### v0.1
+v login in react
+v layout schermo
+
 - mappa fissa + token draggabile
 - fog of war
 - (movimento solo su griglia discreta?)
@@ -25,11 +27,13 @@ virtual tabletop implementation:
 	- authorization utenti
 
 - combattimento
-	- effetti grafici
+	- effetti grafici (incantesimi, )
 	- statistiche PC
-	- layout schermo
-		- chat
+	- resa grafica stat PC
+		- raggio portata arma
+		- HP/mana points
+		- scala dimensione token
 
-+ editor occlusioni per fog-of-war
++ editor occlusioni per line of sight
 + gestione libreria token
 + azioni; macro; stats PC; ruleset RPG noti

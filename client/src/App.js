@@ -1,34 +1,26 @@
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import { PrivateRoute } from "./components/PrivateRoute";
+
+import GridPage from "./components/GridPage";
+import LoginPage from "./components/LoginPage";
+
+import "./App.css";
 
 
-class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			response: false,
-			endpoint: "http://127.0.0.1:4001"
-		};
-	}
+// setup fake backend
+//import { configureFakeBackend } from './utils/fakeBackend';
+//configureFakeBackend();
+//
 
-	componentDidMount() {
-		const { endpoint } = this.state;
-		const socket = socketIOClient(endpoint);
-		socket.on("Counter", data => this.setState({ response: data }));
-	}
-
-	render() {
-		const { response } = this.state;
+export default class App extends Component {
+    render() {
 		return (
-			<div style={{ textAlign: "center" }}>
-			{response
-				? <p>
-				The count is up to : {response}
-				</p>
-				: <p>Loading...</p>}
-			</div>
-		);
+			<Router>
+				<PrivateRoute exact path="/" component={GridPage} />
+				<Route path="/login" component={LoginPage} />
+			</Router>
+        );
 	}
 }
-
-export default App;
