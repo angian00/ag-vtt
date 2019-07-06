@@ -1,9 +1,53 @@
+
+html, body, #root {
+	height: 99.5%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#mainContainer {
+	background-color: "green";
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 5px;
+}
+
+#infoPanel {
+	flex: 1;
+	margin-bottom: 5px;
+}
+
+#horContainer {
+	flex: 6;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+#chatPanel {
+	flex: 1;
+	margin-right: 5px;
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+#mapPanel {
+	flex: 3;
+	border: 1px red solid;
+	overflow: hidden;
+}
+
+
 .bordered {
 	border: 1px black solid;
 }
 
 
- 
 .chat-message {
  	padding: 5px 10px;
  	width: 90%;
@@ -25,4 +69,8 @@
 .chat-input {
 	width: 75%;
 	margin: 5px 10px;
+}
+
+.react-grid-layout {
+	border: 1px green solid;
 }

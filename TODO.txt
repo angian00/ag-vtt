@@ -17,14 +17,31 @@ v esplorare uso con react
 v login in react
 v layout schermo
 
-- mappa fissa + token draggabile
+v mappa fissa + token draggabile
 - fog of war
-- (movimento solo su griglia discreta?)
+- griglia opzionale:
+	- view grid
+	- snap to grid
+
 
 ### v0.2
 - gestione dinamica
 	- comparsa nuovi token
-	- authorization utenti
+
+- scroll e zoom mappa
+- scala dimensione token
+- rotazione token
+
+
+
+### ...
+- multitenancy (broadcast dei messaggi solo nella stessa gameSession)
+
+-strumenti gm
+	- lancio/tag dati
+	- handouts
+	- disegno e annotazioni testuali mappa
+
 
 - combattimento
 	- effetti grafici (incantesimi, )
@@ -32,7 +49,7 @@ v layout schermo
 	- resa grafica stat PC
 		- raggio portata arma
 		- HP/mana points
-		- scala dimensione token
+		
 
 + editor occlusioni per line of sight
 + gestione libreria token
