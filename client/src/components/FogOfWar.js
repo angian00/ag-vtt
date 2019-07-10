@@ -3,23 +3,16 @@ import { Rect } from 'react-konva';
 
 
 export default class FogOfWar extends Component {
-	constructor(props) {
-		super(props);
-		this.store = props.store;
-	}
-
 	render() {
-		let metadata = this.store.getState().mapMetadata;
-		let visibleTiles = this.store.getState().visibleTiles;
-		let visitedTiles = this.store.getState().visitedTiles;
+		let metadata = this.props.mapMetadata;
 
 		let rects = [];
 		for (let i=0; i < metadata.nTilesX; i++) {
 			for (let j=0; j < metadata.nTilesY; j++) {
 				let opacity = 1.0;
-				if (visibleTiles[i][j])
+				if (this.props.visibleTiles[i][j])
 					opacity = 0.0;
-				else if (visitedTiles[i][j])
+				else if (this.props.visitedTiles[i][j])
 					opacity = 0.55;
 
 				let rect = <Rect 

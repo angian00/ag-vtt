@@ -42,7 +42,7 @@ export default class ChatPanel extends Component {
 
 	render() {
 		return (
-			<div id={this.props.id} className="bordered">
+			<div id="chatPanel" className="text-panel">
 				<div style={{ width: "100%" }}>
 				{
 					this.state.msgQueue.map((m, i) =>

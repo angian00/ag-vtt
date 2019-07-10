@@ -1,24 +1,36 @@
 import React, { Component } from "react";
 
+//TODO: get from redux
+const sessionMetadata = {
+	charName: "Frodo Baggins",
+	playerName: "Ron Howard",
+	gmName: "Rody Zimmerman",
+	campaignName: "The Mighty Sword of Fate",
+	encounterName: "The Cavern of Slimy Doom"
+};
 
 export default class InfoPanel extends Component {
-	constructor(props) {
-		super(props);
-		this.store = this.props.store;
-	}
-
 	render() {
-		let allPos = this.store.getState().tokenPositions;
-		console.log(this.store.getState());
 		return (
-			<div>
-				<h3>Info Panel</h3>
-				{
-					Object.keys(allPos).map(k =>
-						<div key={k}>{k} => (x: {allPos[k].x}, y: x: {allPos[k].y})</div>
-					)
-				}
+			<div id="infoPanel" className="text-panel">
+				<div className="info-item">
+					<span className="info-label">hero name:</span>
+					&nbsp;
+					<span className="info-text">{sessionMetadata.charName}</span>
+				</div>
+				<div className="info-item">
+					<span className="info-label">campaign:</span>
+					&nbsp;
+					<span className="info-text">{sessionMetadata.campaignName}</span>
+				</div>
+				<div className="info-item">
+					<span className="info-label">encounter:</span>
+					&nbsp;
+					<span className="info-text">{sessionMetadata.encounterName}</span>
+				</div>
 			</div>
+
+			//TODO: logout button
 		);
 	}
 }

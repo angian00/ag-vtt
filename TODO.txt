@@ -17,13 +17,15 @@ v griglia
 
 
 ### v0.2
-- menu ToolsPanel e InfoPanel
+v menu ToolsPanel e InfoPanel
 - propagazione stato con redux + socket.io
+	v uso connect()
+	- informarsi libreria Immutable
+	- multi-client con redux-socket.io
 
 - bugfixing layout
 - scroll e zoom mappa
 - rotazione token
-
 - resa grafica stat PC
 	- raggio portata arma
 	- HP/mana points
@@ -48,6 +50,8 @@ v griglia
 - effetto blur x visitedTiles
 
 - multitenancy (broadcast dei messaggi solo nella stessa gameSession)
+	- CRUD campagne/incontri
+	+ provisioning utenti
 
 -strumenti gm
 	- lancio/tag dati

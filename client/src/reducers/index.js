@@ -27,14 +27,11 @@ function initialState() {
 		visitedTiles.push(visitedTilesRow);
 	}
 
-	visibleTiles[0][0] = true; //DEBUG
-	visitedTiles[0][0] = true; //DEBUG
-
 	return {
 		mapMetadata: mapMetadata,
 		visibleTiles: visibleTiles,
 		visitedTiles: visitedTiles,
-		tokenPositions: {},
+		tokenPositions: {dwarf: {x: -999, y: -999}},
 	};	
 
 }
@@ -43,16 +40,13 @@ function initialState() {
 export default function(state = initialState(), action) {
 	switch (action.type) {
 		case 'MOVE_TOKEN':
+			console.log("Moving token: ");
 			console.log(action);
-			console.log("Moving token");
-
-			let newPos = {...state.tokenPositions};
-			newPos[action.tokenId] = {x: action.x, y: action.y};
 
 			return {
 				...state,
 				...updateVisTiles(state, action.x, action.y),
-				tokenPositions: newPos,
+				tokenPositions: { ...state.tokenPositions, [action.tokenId]: {x: action.x, y: action.y}},
 				//visibleTiles: updateVisibleTiles(state, action.x, action.y)
 			};
 

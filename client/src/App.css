@@ -5,8 +5,10 @@ html, body, #root {
 	padding: 0 0 0 0;
 }
 
+
+/* -------- LAYOUT -------- */
+
 #mainContainer {
-	background-color: "green";
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -15,12 +17,27 @@ html, body, #root {
 	padding: 5px;
 }
 
-#infoPanel {
+
+#horContainer1 {
 	flex: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: stretch;
 	margin-bottom: 5px;
 }
 
-#horContainer {
+#infoPanel {
+	flex: 1;
+	margin-right: 5px;
+}
+
+#toolPanel {
+	flex: 1;
+}
+
+
+#horContainer2 {
 	flex: 6;
 	display: flex;
 	flex-direction: row;
@@ -37,18 +54,43 @@ html, body, #root {
 }
 
 #mapPanel {
-	flex: 3;
+	flex: 4;
 	border: 1px red solid;
 	overflow: hidden;
 }
 
 
-.bordered {
+
+/* -------- COMMON -------- */
+
+.text-panel {
 	border: 1px black solid;
 }
 
+h3 {
+	margin: 0;
+}
 
+/* -------- INFO -------- */
+
+.info-item {
+	padding: 3px 10px;
+}
+
+.info-label {
+	font-style: italic;
+	font-size: 0.9em;
+}
+
+
+/* -------- TOOLS -------- */
+.tools-group-label {
+	padding: 3px 10px;
+}
+
+/* -------- CHAT -------- */
 .chat-message {
+	margin: 0;
  	padding: 5px 10px;
  	width: 90%;
  	height: 20px;
@@ -58,7 +100,7 @@ html, body, #root {
 .chat-sender {
 	float: left;
 	width: 50px;
-	margin-right: 20px;
+	margin-right: 15px;
 	font-style: italic;
 }
 
@@ -67,10 +109,7 @@ html, body, #root {
 }
 
 .chat-input {
-	width: 75%;
+	width: 70%;
 	margin: 5px 10px;
 }
 
-.react-grid-layout {
-	border: 1px green solid;
-}

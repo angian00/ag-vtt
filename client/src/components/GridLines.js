@@ -6,13 +6,8 @@ const gridColor = "rgb(20, 20, 20)";
 
 
 export default class GridLines extends Component {
-	constructor(props) {
-		super(props);
-		this.store = props.store;
-	}
-
 	render() {
-		let metadata = this.store.getState().mapMetadata;
+		let metadata = this.props.mapMetadata;
 
 		let lines = [];
 

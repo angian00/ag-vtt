@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Stage, Layer, Image } from 'react-konva';
+import { connect } from "react-redux";
+//import _ from "lodash";
 
 import GridLines from './GridLines';
 import FogOfWar from './FogOfWar';
-import { moveToken } from '../actions'
+import { moveToken } from '../actions';
 
 
 class LoadedImage extends Component {
 	constructor(props) {
 		super(props);
 		this.id = this.props.id;
-		this.store = props.store;
 
 		this.state = { image: null, 
-			x: (props.x || 0), y: (props.y || 0),
+			x: (props.x || -10), y: (props.y || -10),
 			scale: (props.scale || 1),
 		};
 	}
@@ -81,17 +82,21 @@ class LoadedImage extends Component {
 	}
 }
 
-export default class MapPanel extends Component {
+class MapPanel extends Component {
 	constructor(props) {
 		super(props);
-		this.store = props.store;
+		console.log(props);
+	}
 
+	componentDidMount() {
 		//DEBUG
-		this.store.dispatch(moveToken("dwarf", 0, 0));
+		this.props.moveToken("dwarf", this.props.mapMetadata.tileSize, this.props.mapMetadata.tileSize);
+		//this.props.moveToken("dwarf", -10, -10); //works
+		//this.props.moveToken("dwarf", 0, 0);  //not working for some reason
 	}
 
 	tokenDraggedHandler(tokenId, x, y) {
-		let mapMetadata = this.store.getState().mapMetadata;
+		let mapMetadata = this.props.mapMetadata;
 
 		const snapToGrid = true; //TODO: move to option/metadata
 		if (snapToGrid) {
@@ -111,24 +116,29 @@ export default class MapPanel extends Component {
 			y *= tileSize;
 		}
 
-		this.store.dispatch(moveToken(tokenId, x, y));
+		this.props.moveToken(tokenId, x, y);
 	}
 
 
 	render() {
-		let tokenPos = this.store.getState().tokenPositions.dwarf || {x: -100, y: -100};
+		let tokenPos = this.props.tokenPositions.dwarf || {x: -100, y: -100};
+		console.log("tokenPos");
+		console.log(tokenPos);
 
 		return (
 			<div id="mapPanel">
-				<Stage width={2000} height={2000}>
+				<Stage width={this.props.mapMetadata.mapW} height={this.props.mapMetadata.mapH}>
 					<Layer>
-						<LoadedImage src="/images/dungeon_map.jpg" />
+						<LoadedImage src="/images/dungeon_map.jpg" x={0} y={0} />
 					</Layer>
 					<Layer>
-						<GridLines store={this.store} />
+						<GridLines mapMetadata={this.props.mapMetadata} />
 					</Layer>
 					<Layer>
-						<FogOfWar store={this.store} />
+						<FogOfWar mapMetadata={this.props.mapMetadata} 
+							visibleTiles={this.props.visibleTiles}
+							visitedTiles={this.props.visitedTiles}
+						/>
 					</Layer>
 					<Layer>
 						<LoadedImage src="/images/dwarf.png" id="dwarf" scale={0.2} 
@@ -140,3 +150,9 @@ export default class MapPanel extends Component {
 		);
 	}
 }
+
+
+export default connect(
+	state => state,
+	{ moveToken }
+)(MapPanel);
