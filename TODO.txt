@@ -1,15 +1,8 @@
 
-v hello world websockets
-v esplorare uso con react
-- esplorare librerie js gaming/canvas
-	- konva
-	
-- cattura eventi input (drag & drop, chat)
-- design protocollo comunicaz
-	- eventi grafici
-		- animazioni
-	- chat
-	- tiro dadi
+## Bugfixing e problemi
+- implementazione custom PrivateRoute
+- problemi layout gridpage su chrome notebook lab
+- problemi fog of war/snap to grid a cavallo griglia? e per indici negativi
 
 
 ## Milestones
@@ -18,10 +11,12 @@ v login in react
 v layout schermo
 
 v mappa fissa + token draggabile
-- fog of war
-- griglia opzionale:
-	- view grid
-	- snap to grid
+
+v stato con redux
+
+v fog of war
+
+v griglia
 
 
 ### v0.2
@@ -29,8 +24,12 @@ v mappa fissa + token draggabile
 	- comparsa nuovi token
 
 - scroll e zoom mappa
-- scala dimensione token
+- catalogo (metadati token/mappe)
+	- scala
 - rotazione token
+- animazioni per movimenti (frecce con fading out)
+- effetti irregolari x fog of war
+- effetto blur x visitedTiles
 
 
 
@@ -54,3 +53,4 @@ v mappa fissa + token draggabile
 + editor occlusioni per line of sight
 + gestione libreria token
 + azioni; macro; stats PC; ruleset RPG noti
+
