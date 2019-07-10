@@ -11,29 +11,42 @@ v login in react
 v layout schermo
 
 v mappa fissa + token draggabile
-
 v stato con redux
-
 v fog of war
-
 v griglia
 
 
 ### v0.2
+- menu ToolsPanel e InfoPanel
+- propagazione stato con redux + socket.io
+
+- bugfixing layout
+- scroll e zoom mappa
+- rotazione token
+
+- resa grafica stat PC
+	- raggio portata arma
+	- HP/mana points
+- catalogo (metadati token/mappe)
+	- scala
+
+
+
+### Approfondimenti
+- informarsi su collaborative editing:
+	https://medium.com/@david.roegiers/building-a-real-time-collaborative-text-editor-for-the-web-draftjs-sharedb-1dd8e8826295
+	(uso sharedb)
+	e/o redux + websocket (es. redux-socket.io)
+
+
+### v0.x
 - gestione dinamica
 	- comparsa nuovi token
 
-- scroll e zoom mappa
-- catalogo (metadati token/mappe)
-	- scala
-- rotazione token
 - animazioni per movimenti (frecce con fading out)
 - effetti irregolari x fog of war
 - effetto blur x visitedTiles
 
-
-
-### ...
 - multitenancy (broadcast dei messaggi solo nella stessa gameSession)
 
 -strumenti gm
