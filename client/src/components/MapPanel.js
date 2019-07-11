@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Stage, Layer, Image } from 'react-konva';
+import { Stage, Layer, Image, Group, Rect } from 'react-konva';
 import { connect } from "react-redux";
 //import _ from "lodash";
 
@@ -15,11 +15,11 @@ class LoadedImage extends Component {
 
 		let x = props.x;
 		if (x === undefined)
-			x = -10;
+			x = -999;
 
 		let y = props.y;
 		if (y === undefined)
-			y = -10;
+			y = -999;
 
 		this.state = { image: null, 
 			x: x, y: y,
@@ -62,30 +62,68 @@ class LoadedImage extends Component {
 			h = this.state.image.height * this.props.scale;
 		}
 
-		return (
-			<Image
-				x={this.state.x}
-				y={this.state.y}
-				width={w}
-				height={h}
-				image={this.state.image}
-				ref={node => { this.imageNode = node; }}
-				draggable={this.props.draggable}
-				onDragStart={e => {
-					let img = e.target;
-					console.log(img);
-					img.alpha(0.5);
-					this.setState({ isDragging: true }); 
-				}}
-				onDragEnd={e => {
-					let img = e.target;
-					img.alpha(1);
-					//this.setState({ isDragging: false, x: img.x(), y: img.y() });
-					this.setState({ isDragging: false });
+		let drawStatBars = this.props.statBars && (this.state.image) && (!this.state.isDragging);
 
-					this.props.draggedHandler(this.id, img.x(), img.y());
-				}}
-			/>
+		return (
+			<Group>
+				<Image
+					x={this.state.x}
+					y={this.state.y}
+					width={w}
+					height={h}
+					image={this.state.image}
+					ref={node => { this.imageNode = node; }}
+					draggable={this.props.draggable}
+					onDragStart={e => {
+						let img = e.target;
+						console.log(img);
+						img.alpha(0.5);
+						this.setState({ isDragging: true }); 
+					}}
+					onDragEnd={e => {
+						let img = e.target;
+						img.alpha(1);
+						//this.setState({ isDragging: false, x: img.x(), y: img.y() });
+						this.setState({ isDragging: false });
+
+						this.props.draggedHandler(this.id, img.x(), img.y());
+					}}
+				/>
+				{
+					drawStatBars ?
+						<Group>
+							<Rect
+								x={this.state.x + 10}
+								y={this.state.y + w}
+								width={70}
+								height={5}
+								fill="black"
+							/>
+							<Rect
+								x={this.state.x + 10}
+								y={this.state.y + w}
+								width={50}
+								height={5}
+								fill="green"
+							/>
+							<Rect
+								x={this.state.x + 10}
+								y={this.state.y + w + 10}
+								width={70}
+								height={5}
+								fill="black"
+							/>
+							<Rect
+								x={this.state.x + 10}
+								y={this.state.y + w + 10}
+								width={65}
+								height={5}
+								fill="blue"
+							/>
+						</Group>
+					: null
+				}
+			</Group>
 		);
 	}
 }
@@ -147,7 +185,8 @@ class MapPanel extends Component {
 						/>
 					</Layer>
 					<Layer>
-						<LoadedImage src="/images/dwarf.png" id="dwarf" scale={0.2} 
+						<LoadedImage src="/images/dwarf.png" id="dwarf"
+							scale={0.2}  statBars={true} 
 							x={tokenPos.x} y={tokenPos.y}
 							draggable={true} draggedHandler={this.tokenDraggedHandler.bind(this)} />
 					</Layer>

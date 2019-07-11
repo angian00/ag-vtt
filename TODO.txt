@@ -12,7 +12,6 @@
 - scroll and zoom map
 - token rotation; facing direction metadata
 - other token decorations
-	- HP/mana bars
 	- weapon range
 
 
@@ -24,6 +23,8 @@
 
 
 ### v0.x
+- refactoring LoadedImage (Token class)
+
 - add new token
 
 - movement animations (arrows with fading out)

@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Added
 - drafts for ToolsPanel and InfoPanel
+- token decorations
+	- HP/mana bars
 
 ### Changed
 v refactored state management to use react-redux connect()
