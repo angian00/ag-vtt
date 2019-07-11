@@ -1,4 +1,5 @@
 function initialState() {
+	//in pixels
 	let mapW = 1440;
 	let mapH = 810;
 	let tileSize = 90;

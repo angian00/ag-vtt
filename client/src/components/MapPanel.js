@@ -21,9 +21,9 @@ class LoadedImage extends Component {
 		if (y === undefined)
 			y = -999;
 
-		this.state = { image: null, 
+		this.state = {
 			x: x, y: y,
-			scale: (props.scale || 1),
+			image: null, 
 		};
 	}
 
@@ -69,10 +69,8 @@ class LoadedImage extends Component {
 		return (
 			<Group>
 				<Image
-					x={this.state.x}
-					y={this.state.y}
-					width={w}
-					height={h}
+					x={this.state.x} y={this.state.y}
+					scaleX={this.props.scale} scaleY={this.props.scale}
 					image={this.state.image}
 					ref={node => { this.imageNode = node; }}
 					draggable={this.props.draggable}
@@ -140,11 +138,6 @@ class LoadedImage extends Component {
 }
 
 class MapPanel extends Component {
-	constructor(props) {
-		super(props);
-		console.log(props);
-	}
-
 	componentDidMount() {
 		//DEBUG
 		this.props.moveToken("dwarf", 0, 0);  //not working for some reason
@@ -176,15 +169,27 @@ class MapPanel extends Component {
 
 
 	render() {
+		// "scales" are in pixels/ft
+		//TODO: move to metadata/props
+		let zoomScale = 30;
+		//let zoomScale = 15;
+		let mapScale = 30;
+		let tokenScale = 150;
+		//
+
+		let mapScaleFactor = zoomScale / mapScale;
+		let tokenScaleFactor = zoomScale / tokenScale;
+		//
+
 		let tokenPos = this.props.tokenPositions.dwarf || {x: -100, y: -100};
 		console.log("tokenPos");
 		console.log(tokenPos);
 
 		return (
 			<div id="mapPanel">
-				<Stage width={this.props.mapMetadata.mapW} height={this.props.mapMetadata.mapH}>
+				<Stage width={this.props.mapMetadata.mapW*mapScaleFactor} height={this.props.mapMetadata.mapH*mapScaleFactor}>
 					<Layer>
-						<LoadedImage src="/images/dungeon_map.jpg" x={0} y={0} />
+						<LoadedImage src="/images/dungeon_map.jpg" x={0} y={0} scale={mapScaleFactor} />
 					</Layer>
 					<Layer>
 						<GridLines mapMetadata={this.props.mapMetadata} />
@@ -197,8 +202,9 @@ class MapPanel extends Component {
 					</Layer>
 					<Layer>
 						<LoadedImage src="/images/dwarf.png" id="dwarf"
-							scale={0.2}  drawDecorations={true} 
+							scale={tokenScaleFactor}
 							x={tokenPos.x} y={tokenPos.y}
+							drawDecorations={true} 
 							draggable={true} draggedHandler={this.tokenDraggedHandler.bind(this)} />
 					</Layer>
 				</Stage>

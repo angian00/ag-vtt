@@ -21,7 +21,8 @@ export default class FogOfWar extends Component {
 					y={ j*metadata.tileSize }
 					width={ metadata.tileSize }
 					height={ metadata.tileSize }
-					fill={"rgba(20, 20, 20, " + opacity + ")"}
+					fill="#141414"
+					opacity={opacity}
 					listening={false}
 				/>;
 				rects.push(rect);
