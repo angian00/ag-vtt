@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Stage, Layer, Image, Group, Rect } from 'react-konva';
+import { Stage, Layer, Image, Group, Rect, Circle } from 'react-konva';
 import { connect } from "react-redux";
 //import _ from "lodash";
 
@@ -56,13 +56,15 @@ class LoadedImage extends Component {
 	}
 
 	render() {
+		const weaponRange = 100;
+
 		let w, h;
 		if (this.state.image) {
 			w = this.state.image.width * this.props.scale;
 			h = this.state.image.height * this.props.scale;
 		}
 
-		let drawStatBars = this.props.statBars && (this.state.image) && (!this.state.isDragging);
+		let drawDecorations = this.props.drawDecorations && (this.state.image) && (!this.state.isDragging);
 
 		return (
 			<Group>
@@ -90,7 +92,7 @@ class LoadedImage extends Component {
 					}}
 				/>
 				{
-					drawStatBars ?
+					drawDecorations ?
 						<Group>
 							<Rect
 								x={this.state.x + 10}
@@ -104,7 +106,7 @@ class LoadedImage extends Component {
 								y={this.state.y + w}
 								width={50}
 								height={5}
-								fill="green"
+								fill="red"
 							/>
 							<Rect
 								x={this.state.x + 10}
@@ -119,6 +121,15 @@ class LoadedImage extends Component {
 								width={65}
 								height={5}
 								fill="blue"
+							/>
+
+							<Circle
+								x={this.state.x + w/2}
+								y={this.state.y + h/2}
+								radius={weaponRange}
+								stroke="#00ff00"
+								strokeWidth={0.5}
+								listening={false}
 							/>
 						</Group>
 					: null
@@ -186,7 +197,7 @@ class MapPanel extends Component {
 					</Layer>
 					<Layer>
 						<LoadedImage src="/images/dwarf.png" id="dwarf"
-							scale={0.2}  statBars={true} 
+							scale={0.2}  drawDecorations={true} 
 							x={tokenPos.x} y={tokenPos.y}
 							draggable={true} draggedHandler={this.tokenDraggedHandler.bind(this)} />
 					</Layer>

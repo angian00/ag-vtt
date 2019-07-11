@@ -10,9 +10,7 @@
 - realtime multi-client with redux-socket.io
 
 - scroll and zoom map
-- token rotation; facing direction metadata
-- other token decorations
-	- weapon range
+- token rotation; token direction metadata/token image normalization
 
 
 ### Research

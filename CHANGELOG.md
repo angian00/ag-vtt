@@ -5,6 +5,7 @@
 - drafts for ToolsPanel and InfoPanel
 - token decorations
 	- HP/mana bars
+	- weaponRange
 
 ### Changed
 v refactored state management to use react-redux connect()
