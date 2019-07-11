@@ -1,75 +1,53 @@
+# TODO
 
-## Bugfixing e problemi
-- problemi fog of war/snap to grid a cavallo griglia? e per indici negativi
-
+## Open problems
+- intermittent problems with snap-to-grid
 
 
 ## Milestones
-### v0.1
-v login in react
-v layout schermo
-
-v mappa fissa + token draggabile
-v stato con redux
-v fog of war
-v griglia
-
 
 ### v0.2
-v menu ToolsPanel e InfoPanel
-- propagazione stato con redux + socket.io
-	v uso connect()
-	- multi-client con redux-socket.io
+- realtime multi-client with redux-socket.io
 
-- bugfixing layout
-- scroll e zoom mappa
-- rotazione token
-- resa grafica stat PC
-	- raggio portata arma
-	- HP/mana points
-- catalogo (metadati token/mappe)
-	- scala
-
-#### Bugfixing
-v issue with layout gridpage on chrome
-v white border on bottom and right of map
+- scroll and zoom map
+- token rotation; facing direction metadata
+- other token decorations
+	- HP/mana bars
+	- weapon range
 
 
-
-### Approfondimenti
-- informarsi su collaborative editing:
+### Research
+- redux + websocket (es. redux-socket.io)
+- collaborative editing:
 	https://medium.com/@david.roegiers/building-a-real-time-collaborative-text-editor-for-the-web-draftjs-sharedb-1dd8e8826295
 	(uso sharedb)
-	e/o redux + websocket (es. redux-socket.io)
 
 
 ### v0.x
-- gestione dinamica
-	- comparsa nuovi token
+- add new token
 
-- animazioni per movimenti (frecce con fading out)
-- effetti irregolari x fog of war
-- effetto blur x visitedTiles
+- movement animations (arrows with fading out)
+- make fog of war irregular
+- blur filter for visitedTiles
 
-- multitenancy (broadcast dei messaggi solo nella stessa gameSession)
-	- CRUD campagne/incontri
-	+ provisioning utenti
+- multitenancy (gameSession scope)
+	- CRUD campaign/encounter
+	+ user provisioning
 
--strumenti gm
-	- lancio/tag dati
+- gm tools
+	- dice rolls
 	- handouts
-	- disegno e annotazioni testuali mappa
+	- sketches and annotations on map
 
+- catalog (token/map metadata)
+	- scale factor
 
-- combattimento
-	- effetti grafici (incantesimi, )
-	- statistiche PC
-	- resa grafica stat PC
-		- raggio portata arma
-		- HP/mana points
+- combat
+	- effects (weapons, spells)
+	- PC stats
 		
 
-+ editor occlusioni per line of sight
-+ gestione libreria token
-+ azioni; macro; stats PC; ruleset RPG noti
++ line-of-sight occlusion editor
++ token library management
++ macros; RPG system ruleset
 
