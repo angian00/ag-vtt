@@ -28,7 +28,7 @@ export default class App extends Component {
     render() {
 		return (
 			<Router>
-				<Route exact path="/" component={GamePage} />
+				<PrivateRoute exact path="/" component={GamePage} />
 				<Route path="/login" component={LoginPage} />
 			</Router>
         );

@@ -1,8 +1,8 @@
 
 ## Bugfixing e problemi
-- implementazione custom PrivateRoute
-- problemi layout gridpage su chrome notebook lab
 - problemi fog of war/snap to grid a cavallo griglia? e per indici negativi
+- bordo bianco in disegno mappa su monitor grande
+
 
 
 ## Milestones
@@ -20,7 +20,6 @@ v griglia
 v menu ToolsPanel e InfoPanel
 - propagazione stato con redux + socket.io
 	v uso connect()
-	- informarsi libreria Immutable
 	- multi-client con redux-socket.io
 
 - bugfixing layout
@@ -31,6 +30,9 @@ v menu ToolsPanel e InfoPanel
 	- HP/mana points
 - catalogo (metadati token/mappe)
 	- scala
+
+#### Bugfixing
+v issue with layout gridpage on chrome
 
 
 

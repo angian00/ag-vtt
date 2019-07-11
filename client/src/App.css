@@ -10,16 +10,12 @@ html, body, #root {
 
 #mainContainer {
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: stretch;
 	padding: 5px;
 }
 
 
 #horContainer1 {
-	flex: 1;
+	height: 15%;
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
@@ -38,7 +34,7 @@ html, body, #root {
 
 
 #horContainer2 {
-	flex: 6;
+	height: 85%;
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
