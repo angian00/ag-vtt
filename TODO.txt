@@ -1,7 +1,6 @@
 
 ## Bugfixing e problemi
 - problemi fog of war/snap to grid a cavallo griglia? e per indici negativi
-- bordo bianco in disegno mappa su monitor grande
 
 
 
@@ -33,6 +32,7 @@ v menu ToolsPanel e InfoPanel
 
 #### Bugfixing
 v issue with layout gridpage on chrome
+v white border on bottom and right of map
 
 
 

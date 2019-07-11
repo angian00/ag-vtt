@@ -13,8 +13,16 @@ class LoadedImage extends Component {
 		super(props);
 		this.id = this.props.id;
 
+		let x = props.x;
+		if (x === undefined)
+			x = -10;
+
+		let y = props.y;
+		if (y === undefined)
+			y = -10;
+
 		this.state = { image: null, 
-			x: (props.x || -10), y: (props.y || -10),
+			x: x, y: y,
 			scale: (props.scale || 1),
 		};
 	}
@@ -28,8 +36,8 @@ class LoadedImage extends Component {
 			this.loadImage();
 		}
 
-		if ((this.props.x && (this.props.x !== this.state.x)) 
-			|| (this.props.y && (this.props.y !== this.state.y)))
+		if (((this.props.x !== undefined) && (this.props.x !== this.state.x)) 
+			|| ((this.props.y !== undefined) && (this.props.y !== this.state.y)))
 			this.setState({ x: this.props.x, y: this.props.y });
 	}
 
@@ -90,9 +98,7 @@ class MapPanel extends Component {
 
 	componentDidMount() {
 		//DEBUG
-		this.props.moveToken("dwarf", this.props.mapMetadata.tileSize, this.props.mapMetadata.tileSize);
-		//this.props.moveToken("dwarf", -10, -10); //works
-		//this.props.moveToken("dwarf", 0, 0);  //not working for some reason
+		this.props.moveToken("dwarf", 0, 0);  //not working for some reason
 	}
 
 	tokenDraggedHandler(tokenId, x, y) {
