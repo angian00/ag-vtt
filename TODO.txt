@@ -11,6 +11,21 @@
 - token rotation (transformer)
 
 
+### v0.3
+- dice rolling: info rows and stat update
+
+- refactoring
+	- LoadedImage (Token class)
+	- mapMetadata --> viewMetadata
+	- reducers!
+
+- different info visualized for different roles:
+	- gm (views all)
+	- own pc
+	- other pc
+	- monsters
+
+
 ### Research
 - redux + websocket (es. redux-socket.io)
 - collaborative editing:
@@ -19,11 +34,7 @@
 
 
 ### v0.x
-- refactoring
-	- LoadedImage (Token class)
-	- mapMetadata --> viewMetadata
-	- reducers!
-
+- popup info pc
 
 - add new token
 
