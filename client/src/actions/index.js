@@ -6,3 +6,12 @@ export const moveToken = (tokenId, x, y) => {
 		y: y,
 	}
 }
+
+
+export const setZoom = (zoomScale) => {
+	return {
+		type: 'SET_ZOOM',
+		zoomScale: zoomScale,
+	}
+}
+

@@ -8,13 +8,12 @@ const gridColor = "#141414";
 export default class GridLines extends Component {
 	render() {
 		let metadata = this.props.mapMetadata;
-
 		let lines = [];
 
 		for (let i=0; i <= metadata.nTilesX; i++) {
 			let line = <Line 
 				key={"grid_col_" + i}
-				points={[i*metadata.tileSize, 0, i*metadata.tileSize, metadata.tileSize*metadata.nTilesY]}
+				points={[metadata.tileSizePx*i, 0, metadata.tileSizePx*i, metadata.tileSizePx*metadata.nTilesY]}
 				stroke={gridColor}
 				listening={false}
 			/>;
@@ -24,7 +23,7 @@ export default class GridLines extends Component {
 		for (let j=0; j <= metadata.nTilesY; j++) {
 			let line = <Line 
 				key={"grid_row_" + j}
-				points={[0, j*metadata.tileSize, metadata.tileSize*metadata.nTilesX, j*metadata.tileSize]}
+				points={[0, metadata.tileSizePx*j, metadata.tileSizePx*metadata.nTilesX, metadata.tileSizePx*j]}
 				stroke={gridColor}
 				listening={false}
 			/>;

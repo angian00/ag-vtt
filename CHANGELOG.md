@@ -6,9 +6,10 @@
 - token decorations
 	- HP/mana bars
 	- weaponRange
+- view zoom
 
 ### Changed
-v refactored state management to use react-redux connect()
+- refactored state management to use react-redux connect()
 
 ### Fixed
 - issue with layout gridpage on chrome

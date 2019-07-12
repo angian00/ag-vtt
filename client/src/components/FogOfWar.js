@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Rect } from 'react-konva';
 
+const fowColor = "#141414";
 
 export default class FogOfWar extends Component {
 	render() {
@@ -17,11 +18,11 @@ export default class FogOfWar extends Component {
 
 				let rect = <Rect 
 					key={"rect_" + i + "_" + j}
-					x={ i*metadata.tileSize }
-					y={ j*metadata.tileSize }
-					width={ metadata.tileSize }
-					height={ metadata.tileSize }
-					fill="#141414"
+					x={ i*metadata.tileSizePx }
+					y={ j*metadata.tileSizePx }
+					width={ metadata.tileSizePx }
+					height={ metadata.tileSizePx }
+					fill={fowColor}
 					opacity={opacity}
 					listening={false}
 				/>;

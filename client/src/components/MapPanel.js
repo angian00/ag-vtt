@@ -8,6 +8,11 @@ import FogOfWar from './FogOfWar';
 import { moveToken } from '../actions';
 
 
+//as percentages of w/h
+const statBarPaddingPerc = 0.1;
+const statBarHeightPerc = 0.06;
+//
+
 class LoadedImage extends Component {
 	constructor(props) {
 		super(props);
@@ -56,21 +61,47 @@ class LoadedImage extends Component {
 	}
 
 	render() {
-		const weaponRange = 100;
+		if (!this.state.image) 
+			return null;
 
-		let w, h;
-		if (this.state.image) {
-			w = this.state.image.width * this.props.scale;
-			h = this.state.image.height * this.props.scale;
+		//TODO: get from chr props
+		const weaponRangeFt = 3;
+		const hpPerc =0.8;
+		const manaPerc =0.6;
+		//
+
+		//TODO: get from token props
+		const tokenScale = 150; //px per ft
+		//
+
+
+		//TODO: refactor
+		let w, h, statBarPadding, statBarHeight, statBarWidth, weaponRangePx;
+
+		let scaleFactor;
+		if (this.props.id === "map") {
+			scaleFactor = this.props.mapScaleFactor;
+		} else {
+			scaleFactor = this.props.zoomScale / tokenScale;
 		}
 
-		let drawDecorations = this.props.drawDecorations && (this.state.image) && (!this.state.isDragging);
+		w = this.state.image.width * scaleFactor;
+		h = this.state.image.height * scaleFactor;
+
+		statBarPadding = Math.round(statBarPaddingPerc * w);
+		statBarHeight = Math.round(statBarHeightPerc * h);
+		statBarWidth = w - 2*statBarPadding;
+
+		weaponRangePx = weaponRangeFt * this.props.zoomScale;
+
+		let drawDecorations = this.props.drawDecorations && (!this.state.isDragging);
+		console.log(this.props.id + " - drawDecorations: " + drawDecorations);
 
 		return (
 			<Group>
 				<Image
 					x={this.state.x} y={this.state.y}
-					scaleX={this.props.scale} scaleY={this.props.scale}
+					scaleX={scaleFactor} scaleY={scaleFactor}
 					image={this.state.image}
 					ref={node => { this.imageNode = node; }}
 					draggable={this.props.draggable}
@@ -93,38 +124,38 @@ class LoadedImage extends Component {
 					drawDecorations ?
 						<Group>
 							<Rect
-								x={this.state.x + 10}
+								x={this.state.x + statBarPadding}
 								y={this.state.y + w}
-								width={70}
-								height={5}
+								width={statBarWidth}
+								height={statBarHeight}
 								fill="black"
 							/>
 							<Rect
-								x={this.state.x + 10}
+								x={this.state.x + statBarPadding}
 								y={this.state.y + w}
-								width={50}
-								height={5}
+								width={statBarWidth*hpPerc}
+								height={statBarHeight}
 								fill="red"
 							/>
 							<Rect
-								x={this.state.x + 10}
-								y={this.state.y + w + 10}
-								width={70}
-								height={5}
+								x={this.state.x + statBarPadding}
+								y={this.state.y + w + 2*statBarHeight}
+								width={statBarWidth}
+								height={statBarHeight}
 								fill="black"
 							/>
 							<Rect
-								x={this.state.x + 10}
-								y={this.state.y + w + 10}
-								width={65}
-								height={5}
+								x={this.state.x + statBarPadding}
+								y={this.state.y + w + 2*statBarHeight}
+								width={statBarWidth*manaPerc}
+								height={statBarHeight}
 								fill="blue"
 							/>
 
 							<Circle
 								x={this.state.x + w/2}
 								y={this.state.y + h/2}
-								radius={weaponRange}
+								radius={weaponRangePx}
 								stroke="#00ff00"
 								strokeWidth={0.5}
 								listening={false}
@@ -146,50 +177,44 @@ class MapPanel extends Component {
 	tokenDraggedHandler(tokenId, x, y) {
 		let mapMetadata = this.props.mapMetadata;
 
+		console.log("tokenDraggedHandler");
+		console.log("x=" + x + ", y=" + y);
+
 		const snapToGrid = true; //TODO: move to option/metadata
 		if (snapToGrid) {
-			let tileSize = mapMetadata.tileSize;
-			x = Math.round(x / tileSize);
+			x = Math.round(x / mapMetadata.tileSizePx);
 			if (x < 0)
 				x = 0;
 			if (x >= mapMetadata.nTilesX)
 				x = mapMetadata.nTilesX - 1;
-			x *= tileSize;
+			x *= mapMetadata.tileSizePx;
 
-			y = Math.round(y / tileSize);
+			y = Math.round(y / mapMetadata.tileSizePx);
 			if (y < 0)
 				y = 0;
 			if (y >= mapMetadata.nTilesY)
 				y = mapMetadata.nTilesY - 1;
-			y *= tileSize;
+			y *= mapMetadata.tileSizePx;
 		}
 
+		x = view2mapCoord(x, this.props.mapMetadata);
+		y = view2mapCoord(y, this.props.mapMetadata);
 		this.props.moveToken(tokenId, x, y);
 	}
 
 
 	render() {
-		// "scales" are in pixels/ft
-		//TODO: move to metadata/props
-		let zoomScale = 30;
-		//let zoomScale = 15;
-		let mapScale = 30;
-		let tokenScale = 150;
-		//
-
-		let mapScaleFactor = zoomScale / mapScale;
-		let tokenScaleFactor = zoomScale / tokenScale;
-		//
-
 		let tokenPos = this.props.tokenPositions.dwarf || {x: -100, y: -100};
-		console.log("tokenPos");
-		console.log(tokenPos);
+		let mapScaleFactor = this.props.mapMetadata.mapScaleFactor;
+		let mapW = this.props.mapMetadata.mapW;
+		let mapH = this.props.mapMetadata.mapH;
 
 		return (
 			<div id="mapPanel">
-				<Stage width={this.props.mapMetadata.mapW*mapScaleFactor} height={this.props.mapMetadata.mapH*mapScaleFactor}>
+				<Stage width={mapW*mapScaleFactor} height={mapH*mapScaleFactor}>
 					<Layer>
-						<LoadedImage src="/images/dungeon_map.jpg" x={0} y={0} scale={mapScaleFactor} />
+						<LoadedImage src="/images/dungeon_map.jpg" id="map" 
+							x={0} y={0} mapScaleFactor={mapScaleFactor} />
 					</Layer>
 					<Layer>
 						<GridLines mapMetadata={this.props.mapMetadata} />
@@ -202,8 +227,9 @@ class MapPanel extends Component {
 					</Layer>
 					<Layer>
 						<LoadedImage src="/images/dwarf.png" id="dwarf"
-							scale={tokenScaleFactor}
-							x={tokenPos.x} y={tokenPos.y}
+							zoomScale={this.props.mapMetadata.zoomScale}
+							x={map2viewCoord(tokenPos.x, this.props.mapMetadata)}
+							y={map2viewCoord(tokenPos.y, this.props.mapMetadata)}
 							drawDecorations={true} 
 							draggable={true} draggedHandler={this.tokenDraggedHandler.bind(this)} />
 					</Layer>
@@ -211,6 +237,15 @@ class MapPanel extends Component {
 			</div>
 		);
 	}
+}
+
+
+function view2mapCoord(viewCoord, mapMetadata) {
+	return viewCoord * mapMetadata.mapScale / mapMetadata.zoomScale;
+}
+
+function map2viewCoord(mapCoord, mapMetadata) {
+	return mapCoord * mapMetadata.zoomScale / mapMetadata.mapScale;
 }
 
 

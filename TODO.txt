@@ -8,8 +8,6 @@
 
 ### v0.2
 - realtime multi-client with redux-socket.io
-
-- scroll and zoom map
 - token rotation (transformer)
 
 
@@ -21,7 +19,11 @@
 
 
 ### v0.x
-- refactoring LoadedImage (Token class)
+- refactoring
+	- LoadedImage (Token class)
+	- mapMetadata --> viewMetadata
+	- reducers!
+
 
 - add new token
 
