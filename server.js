@@ -5,6 +5,10 @@ const socketIo = require("socket.io");
 const port = process.env.PORT || 4001;
 
 
+const GameState = require("./controllers/GameState");
+var gameState = new GameState();
+
+
 const app = express();
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -23,6 +27,7 @@ app.use(routes);
 const server = http.createServer(app);
 const io = socketIo(server);
 
+
 io.on("connection", socket => {
 	console.log("New client connected");
 
@@ -30,10 +35,22 @@ io.on("connection", socket => {
 		console.log("Client disconnected");
 	});
 
-	socket.on("ChatMessage", function(msg) {
-		console.log("Received message");
+	socket.on("chatMessage", msg => {
+		console.log("Received chatMessage");
 		console.log(msg);
-		io.emit("ChatMessage", msg);
+		//DEBUG
+		io.emit("chatMessage", msg);
+	});
+
+	socket.on("gameAction", action => {
+		console.log("Received action: " + action.type);
+		gameState.performAction(action);
+		//TODO: check for errors
+
+		//DEBUG
+		console.log("Sending stateUpdate");
+		io.emit('stateUpdate', gameState.state);
+		//setTimeout(() => {io.emit("stateUpdate", gameState.state);}, 3000);
 	});
 });
 

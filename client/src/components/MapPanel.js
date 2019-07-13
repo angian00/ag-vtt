@@ -57,6 +57,7 @@ class LoadedImage extends Component {
 	}
 
 	handleLoad () {
+		console.log("Loaded image for [" + this.props.id + "]");
 		this.setState({ image: this.image });
 	}
 
@@ -95,7 +96,10 @@ class LoadedImage extends Component {
 		weaponRangePx = weaponRangeFt * this.props.zoomScale;
 
 		let drawDecorations = this.props.drawDecorations && (!this.state.isDragging);
-		console.log(this.props.id + " - drawDecorations: " + drawDecorations);
+
+		console.log("Rendering [" + this.props.id + "]");
+		console.log("x=" + this.state.x + ", y=" + this.state.y);
+		console.log("w=" + w + ", h=" + h);
 
 		return (
 			<Group>
@@ -107,14 +111,12 @@ class LoadedImage extends Component {
 					draggable={this.props.draggable}
 					onDragStart={e => {
 						let img = e.target;
-						console.log(img);
-						img.alpha(0.5);
+						//img.alpha(0.5);
 						this.setState({ isDragging: true }); 
 					}}
 					onDragEnd={e => {
 						let img = e.target;
-						img.alpha(1);
-						//this.setState({ isDragging: false, x: img.x(), y: img.y() });
+						//img.alpha(1);
 						this.setState({ isDragging: false });
 
 						this.props.draggedHandler(this.id, img.x(), img.y());
@@ -169,9 +171,16 @@ class LoadedImage extends Component {
 }
 
 class MapPanel extends Component {
-	componentDidMount() {
+	constructor(props) {
+		super(props);
+
 		//DEBUG
-		this.props.moveToken("dwarf", 0, 0);  //not working for some reason
+		console.log("MapPanel constructor - Moving token");
+		this.props.moveToken("dwarf", 0, 0);
+		//
+	}
+
+	componentDidMount() {
 	}
 
 	tokenDraggedHandler(tokenId, x, y) {
@@ -199,11 +208,19 @@ class MapPanel extends Component {
 
 		x = view2mapCoord(x, this.props.mapMetadata);
 		y = view2mapCoord(y, this.props.mapMetadata);
+		console.log("tokenDraggedHandler - Moving token");
 		this.props.moveToken(tokenId, x, y);
 	}
 
 
 	render() {
+		if (!this.props.mapMetadata)
+			return null;
+
+		console.log("MapPanel.render()");
+		console.log(this.props.mapMetadata);
+		console.log(this.props.tokenPositions);
+
 		let tokenPos = this.props.tokenPositions.dwarf || {x: -100, y: -100};
 		let mapScaleFactor = this.props.mapMetadata.mapScaleFactor;
 		let mapW = this.props.mapMetadata.mapW;
@@ -219,12 +236,12 @@ class MapPanel extends Component {
 					<Layer>
 						<GridLines mapMetadata={this.props.mapMetadata} />
 					</Layer>
-					<Layer>
+					{/* <Layer>
 						<FogOfWar mapMetadata={this.props.mapMetadata} 
 							visibleTiles={this.props.visibleTiles}
 							visitedTiles={this.props.visitedTiles}
 						/>
-					</Layer>
+					</Layer> */}
 					<Layer>
 						<LoadedImage src="/images/dwarf.png" id="dwarf"
 							zoomScale={this.props.mapMetadata.zoomScale}
@@ -250,6 +267,6 @@ function map2viewCoord(mapCoord, mapMetadata) {
 
 
 export default connect(
-	state => state,
+	state => state || {},
 	{ moveToken }
 )(MapPanel);

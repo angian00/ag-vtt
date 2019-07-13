@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
 
-import {backendEndpoint} from "../config/config.js";
+import socket from '../utils/websocket';
 
 
 export default class ChatPanel extends Component {
@@ -16,14 +15,12 @@ export default class ChatPanel extends Component {
 	}
 
 	componentDidMount() {
-		this.socket = socketIOClient(backendEndpoint);
-
-		this.socket.on("ChatMessage", data => { 
+		socket.on("chatMessage", data => { 
 			this.state.msgQueue.push(data);
 			this.setState({ msgQueue: this.state.msgQueue });
 		});
 		
-		this.socket.emit("ChatMessage", { sender: this.user.name, text: "Hello" });
+		socket.emit("chatMessage", { sender: this.user.name, text: "Hello" });
 	}
 
 	handleInputChange(e) {
@@ -32,7 +29,7 @@ export default class ChatPanel extends Component {
 
 	handleSubmit(e) {
 		if (this.state.inputMsg !== "") {
-			this.socket.emit("ChatMessage", { sender: this.user.name, text: this.state.inputMsg });
+			socket.emit("chatMessage", { sender: this.user.name, text: this.state.inputMsg });
 			this.setState({ inputMsg: "" });
 		}
 

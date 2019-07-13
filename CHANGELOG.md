@@ -1,12 +1,13 @@
 # CHANGELOG
 
-## [Unreleased]
+## [v0.2] - 2019-07-13
 ### Added
 - drafts for ToolsPanel and InfoPanel
+- view zoom
+- basic architecture for multi-client broadcasting via websockets
 - token decorations
 	- HP/mana bars
 	- weaponRange
-- view zoom
 
 ### Changed
 - refactored state management to use react-redux connect()

@@ -36,9 +36,13 @@ class ToolPanel extends Component {
 	}
 }
 
+
 function mapStateToProps(state) {
-	const { mapMetadata } = state
-	return { zoomScale: mapMetadata.zoomScale }
+	if (state) {
+		const { mapMetadata } = state || null;
+		return { zoomScale: mapMetadata.zoomScale };
+	} else
+		return { zoomScale: 15 };
 }
 
 export default connect(

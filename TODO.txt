@@ -6,11 +6,6 @@
 
 ## Milestones
 
-### v0.2
-- realtime multi-client with redux-socket.io
-- token rotation (transformer)
-
-
 ### v0.3
 - dice rolling: info rows and stat update
 
@@ -19,11 +14,15 @@
 	- mapMetadata --> viewMetadata
 	- reducers!
 
+- load initial state as a sync HTTP req from redux
+
 - different info visualized for different roles:
 	- gm (views all)
 	- own pc
 	- other pc
 	- monsters
+
+- token rotation (transformer)
 
 
 ### Research
@@ -35,6 +34,8 @@
 
 ### v0.x
 - popup info pc
+
+- drag decorations with token (to avoid flash after drag ends)
 
 - add new token
 
@@ -56,7 +57,6 @@
 
 - combat
 	- effects (weapons, spells)
-	- PC stats
 		
 
 + line-of-sight occlusion editor

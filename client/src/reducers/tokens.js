@@ -1,7 +1,10 @@
 import _ from "lodash";
 
+import socket from '../utils/websocket';
 
-function initialState() {
+
+
+function initialLocalState() {
 	let mapMetadata = {};
 
 	//--proper map metadata
@@ -43,31 +46,39 @@ function initialState() {
 		mapMetadata: mapMetadata,
 		visibleTiles: visibleTiles,
 		visitedTiles: visitedTiles,
-		tokenPositions: {dwarf: {x: -999, y: -999}},
+		tokenPositions: {dwarf: {x: 200, y: 200}}, //DEBUG
 	};	
 
 }
 
+function updateFromZoomScale(mapMetadata) {
+	mapMetadata.mapScaleFactor = mapMetadata.zoomScale / mapMetadata.mapScale;
+	mapMetadata.tileSizePx = mapMetadata.zoomScale * mapMetadata.tileSizeFt;
+}
 
-export default function(state = initialState(), action) {
+
+export default function(state = initialLocalState(), action) {
 	console.log(action);
 
 	switch (action.type) {
 		case 'MOVE_TOKEN':
-			return {
-				...state,
-				...updateVisTiles(state, action.x, action.y),
-				tokenPositions: { ...state.tokenPositions, 
-					[action.tokenId]: {x: action.x, y: action.y}},
-			};
+			//TODO: local action validation
+			socket.emit("gameAction", action);
+
+			return state;
 
 		case 'SET_ZOOM':
-			let newMapMetadata = _.cloneDeep(state.mapMetadata);
-			newMapMetadata.zoomScale = action.zoomScale;
+			//TODO: save zoom in local state
+			return state;
+
+
+		case 'STATE_UPDATE':
+			console.log("Updating state");
+			let newMapMetadata = _.cloneDeep(action.state.mapMetadata);
 			updateFromZoomScale(newMapMetadata);
 
 			return {
-				...state,
+				...action.state,
 				mapMetadata: newMapMetadata,
 			};
 
@@ -76,43 +87,4 @@ export default function(state = initialState(), action) {
 	}
 }
 
-
-function updateVisTiles(state, xToken, yToken) {
-	let metadata = state.mapMetadata;
-
-	//TODO: make it dependant on char stats
-	const visDistanceFt = 9; // in ft
-
-
-	let newVisibleTiles = [];
-	let newVisitedTiles = [];
-
-	for (let i=0; i < metadata.nTilesX; i++) {
-		let newVisibleTilesRow = [];
-		let newVisitedTilesRow = [];
-
-		for (let j=0; j < metadata.nTilesY; j++) {
-			let dx = (i*metadata.tileSizeFt) - xToken/metadata.mapScale;
-			let dy = (j*metadata.tileSizeFt) - yToken/metadata.mapScale;
-			let distance = Math.sqrt(dx*dx + dy*dy);
-			
-			let currTileVisible = (distance <= visDistanceFt); 
-			let currTileVisited = state.visitedTiles[i][j] || currTileVisible;
-
-			newVisibleTilesRow.push(currTileVisible);
-			newVisitedTilesRow.push(currTileVisited);
-		}
-
-		newVisibleTiles.push(newVisibleTilesRow);
-		newVisitedTiles.push(newVisitedTilesRow);
-	}
-
-	return { visibleTiles: newVisibleTiles, visitedTiles: newVisitedTiles };
-}
-
-
-function updateFromZoomScale(mapMetadata) {
-	mapMetadata.mapScaleFactor = mapMetadata.zoomScale / mapMetadata.mapScale;
-	mapMetadata.tileSizePx = mapMetadata.zoomScale * mapMetadata.tileSizeFt;
-}
 
