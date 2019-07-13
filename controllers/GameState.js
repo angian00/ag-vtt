@@ -17,17 +17,12 @@ class GameState {
 
 		// in pixels/ft
 		mapMetadata.mapScale = 30;
-		//
 
-		//--view/game metadata
+		// in ft
 		mapMetadata.tileSizeFt = 3;
+
 		mapMetadata.nTilesX = Math.ceil(mapMetadata.mapW / (mapMetadata.mapScale*mapMetadata.tileSizeFt));
 		mapMetadata.nTilesY = Math.ceil(mapMetadata.mapH / (mapMetadata.mapScale*mapMetadata.tileSizeFt));
-
-		mapMetadata.zoomScale = 30;
-		//mapMetadata.zoomScale = 15;
-
-		updateFromZoomScale(mapMetadata);
 
 
 		let visibleTiles = [];
@@ -76,7 +71,7 @@ function updateVisTiles(state, xToken, yToken) {
 	let metadata = state.mapMetadata;
 
 	//TODO: make it dependant on char stats
-	const visDistanceFt = 9; // in ft
+	const visDistanceFt = 8; // in ft
 
 
 	let newVisibleTiles = [];
@@ -105,11 +100,6 @@ function updateVisTiles(state, xToken, yToken) {
 	return { visibleTiles: newVisibleTiles, visitedTiles: newVisitedTiles };
 }
 
-
-function updateFromZoomScale(mapMetadata) {
-	mapMetadata.mapScaleFactor = mapMetadata.zoomScale / mapMetadata.mapScale;
-	mapMetadata.tileSizePx = mapMetadata.zoomScale * mapMetadata.tileSizeFt;
-}
 
 
 module.exports = GameState;

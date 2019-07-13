@@ -10,9 +10,8 @@
 - dice rolling: info rows and stat update
 
 - refactoring
-	- LoadedImage (Token class)
-	- mapMetadata --> viewMetadata
 	- reducers!
+
 
 - load initial state as a sync HTTP req from redux
 

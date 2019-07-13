@@ -10,15 +10,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import socket from './utils/websocket';
 //import rootReducer from './reducers';
-import rootReducer from './reducers/tokens';
+import rootReducer from './reducers/rootReducer';
 
 
-//let socketIoMiddleware = createSocketIoMiddleware(socket, "aa");
-//let store = applyMiddleware(socketIoMiddleware)(createStore)(rootReducer);
-//store.subscribe(() => {
-//	console.log('new client state', store.getState());
-//});
-//store.dispatch({ type: "server/hello", data: "Hello!" });
+
 let store = createStore(rootReducer);
 socket.on("stateUpdate", (payload) => 
 	store.dispatch({type: "STATE_UPDATE", state: payload }) 

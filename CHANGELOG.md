@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Unreleased yet
+
+### Changed
+- refactoring
+	- split mapMetadata and viewMetadata
+	- converted to FogOfWar and GridLines to functional components
+	- moved LoadedImage, MapImage, TokenImage to their own classes
+	- reduced initialLocalState knowledge to the minimum
+
+
 ## [v0.2] - 2019-07-13
 ### Added
 - drafts for ToolsPanel and InfoPanel
