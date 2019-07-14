@@ -10,7 +10,10 @@
 - dice rolling: info rows and stat update
 
 - refactoring
-	- reducers!
+	- reducers
+
+- popup info pc
+- keyboard shortcuts
 
 
 - load initial state as a sync HTTP req from redux
@@ -24,19 +27,14 @@
 - token rotation (transformer)
 
 
-### Research
-- redux + websocket (es. redux-socket.io)
-- collaborative editing:
-	https://medium.com/@david.roegiers/building-a-real-time-collaborative-text-editor-for-the-web-draftjs-sharedb-1dd8e8826295
-	(uso sharedb)
-
 
 ### v0.x
-- popup info pc
 
 - drag decorations with token (to avoid flash after drag ends)
 
 - add new token
+
+- design architecture for pluggable rules/tools/macros
 
 - movement animations (arrows with fading out)
 - make fog of war irregular
