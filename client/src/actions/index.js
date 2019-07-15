@@ -8,6 +8,16 @@ export const moveToken = (tokenId, x, y) => {
 }
 
 
+export const rollDice = (dType, dNum) => {
+	return {
+		type: 'ROLL_DICE',
+		dType: dType,
+		dNum: dNum
+	}
+}
+
+
+//----- local actions -----
 export const setZoom = (zoomScale) => {
 	return {
 		type: 'SET_ZOOM',

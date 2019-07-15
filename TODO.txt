@@ -7,19 +7,22 @@
 ## Milestones
 
 ### v0.3
-- dice rolling: info rows and stat update
+- dice rolling: 
+	v dialog
+	- shortcuts cambio focus (x, d)
+	- update chat
+	- update char stats
+
 
 - refactoring
 	- reducers
-
-- popup info pc
-- keyboard shortcuts
+	- aggiungere proptypes a tutti i componenti
 
 
 - load initial state as a sync HTTP req from redux
 
 - different info visualized for different roles:
-	- gm (views all)
+	- gm (can view everything)
 	- own pc
 	- other pc
 	- monsters

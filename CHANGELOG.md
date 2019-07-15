@@ -1,6 +1,10 @@
 # CHANGELOG
 
 ## Unreleased yet
+### Added
+- basic wiring of keyboard shortcuts
+- basic popup for char token
+
 
 ### Changed
 - refactoring

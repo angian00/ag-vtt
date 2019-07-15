@@ -1,0 +1,25 @@
+## font awesome
+
+dice-d20
+dice
+dice-d6
+times
+
+search-plus
+search-minus
+
+file
+book
+folder
+map-marked
+globe-europe
+
+heart
+ghost
+leaf
+tools
+gamepad
+hand-holding-heart
+hand-holding-usd
+drumstick-bite
+street-view

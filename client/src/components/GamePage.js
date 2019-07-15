@@ -5,12 +5,16 @@ import ToolPanel from "./ToolPanel";
 import ChatPanel from "./ChatPanel";
 import MapPanel from "./MapPanel";
 
+import DiceRoller from "./DiceRoller";
 
 
 export default class GamePage extends Component {
 	render() {
 		return (
-			<div id="mainContainer">
+
+        	<div id="mainContainer">
+				{/* modal forms */}
+				<DiceRoller />
 
 				<div id="horContainer1">
 					<InfoPanel />

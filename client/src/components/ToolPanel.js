@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { setZoom } from '../actions';
+import Shortcut from './Shortcut';
+import { runTool } from '../utils/tools.js';
 
 
 class ToolPanel extends Component {
@@ -11,17 +13,16 @@ class ToolPanel extends Component {
 		this.props.setZoom(zoomScale);
 	}
 
-
 	render() {
 		return (
 			<div id="toolPanel" className="text-panel">
-				<div>
+				<div className="tools-group">
 					<div className="tools-group-label">Encounters</div>
 					<button>New</button>
 					<button>Save</button>
 					<button>Delete</button>
 				</div>
-				<div>
+				<div className="tools-group">
 					<div className="tools-group-label">Zoom level (px per ft)</div>
 					<select onChange={this.sendSetZoom.bind(this)} value={this.props.zoomScale}>
 						<option>10</option>
@@ -29,7 +30,12 @@ class ToolPanel extends Component {
 						<option>30</option>
 						<option>50</option>
 					</select>
-
+				</div>
+				<div className="tools-group">
+					<div className="tools-group-label">Dice</div>
+					<Shortcut name="toolRollDice">
+						<button onClick={()=>runTool("rollDice")}>Roll dice</button>
+					</Shortcut>
 				</div>
 			</div>
 		);

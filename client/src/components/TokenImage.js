@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Group, Rect, Circle } from 'react-konva';
+import { Image, Group, Rect, Circle, Label, Text } from 'react-konva';
 
 import LoadedImage from './LoadedImage';
 
@@ -41,9 +41,11 @@ export default class TokenImage extends LoadedImage {
 			return null;
 
 		//TODO: get from char stats
-		const weaponRangeFt = 3;
-		const hpPerc =0.8;
-		const manaPerc =0.6;
+		const charStats = {
+			weaponRangeFt: 3,
+			hpPerc: 0.8,
+			manaPerc: 0.6,
+		};
 		//
 
 		//TODO: get from token metadata
@@ -51,28 +53,26 @@ export default class TokenImage extends LoadedImage {
 		//
 
 
-		//TODO: refactor
-		let w, h, statBarPadding, statBarHeight, statBarWidth, weaponRangePx;
-
 		let scaleFactor = this.props.viewScale / tokenScale;
+		let w = this.state.image.width * scaleFactor;
+		let h = this.state.image.height * scaleFactor;
 
-		w = this.state.image.width * scaleFactor;
-		h = this.state.image.height * scaleFactor;
-
-		statBarPadding = Math.round(statBarPaddingPerc * w);
-		statBarHeight = Math.round(statBarHeightPerc * h);
-		statBarWidth = w - 2*statBarPadding;
-
-		weaponRangePx = weaponRangeFt * this.props.viewScale;
+		let statBarPadding = Math.round(statBarPaddingPerc * w);
+		let statBarHeight = Math.round(statBarHeightPerc * h);
+		let statBarWidth = w - 2*statBarPadding;
 
 		let drawDecorations = this.props.drawDecorations && (!this.state.isDragging);
+		let drawPopup = this.state.drawPopup && (!this.state.isDragging);
 
 		console.log("Rendering token [" + this.props.id + "]");
 		//console.log("x=" + this.state.x + ", y=" + this.state.y);
 		//console.log("w=" + w + ", h=" + h);
 
 		return (
-			<Group>
+			<Group
+				onMouseOver={ e => { this.setState({ drawPopup: true })  } }
+				onMouseOut ={ e => { this.setState({ drawPopup: false }) } }
+			>
 				<Image
 					x={this.state.x} y={this.state.y}
 					scaleX={scaleFactor} scaleY={scaleFactor}
@@ -102,7 +102,7 @@ export default class TokenImage extends LoadedImage {
 							<Rect
 								x={this.state.x + statBarPadding}
 								y={this.state.y + w}
-								width={statBarWidth*hpPerc}
+								width={statBarWidth * charStats.hpPerc}
 								height={statBarHeight}
 								fill="red"
 							/>
@@ -116,7 +116,7 @@ export default class TokenImage extends LoadedImage {
 							<Rect
 								x={this.state.x + statBarPadding}
 								y={this.state.y + w + 2*statBarHeight}
-								width={statBarWidth*manaPerc}
+								width={statBarWidth * charStats.manaPerc}
 								height={statBarHeight}
 								fill="blue"
 							/>
@@ -124,12 +124,24 @@ export default class TokenImage extends LoadedImage {
 							<Circle
 								x={this.state.x + w/2}
 								y={this.state.y + h/2}
-								radius={weaponRangePx}
+								radius={this.props.viewScale * charStats.weaponRangeFt}
 								stroke="#00ff00"
 								strokeWidth={0.5}
 								listening={false}
 							/>
 						</Group>
+					: null
+				}
+				{
+					drawPopup ?
+						<Text text={this.props.id} 
+							x={this.state.x}
+							y={this.state.y - statBarHeight}
+							width={w}
+							height={h}
+							align="center" 
+							opacity={0.7}
+							fontSize={18} fill="white" />
 					: null
 				}
 			</Group>
