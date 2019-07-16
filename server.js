@@ -35,12 +35,19 @@ io.on("connection", socket => {
 		console.log("Client disconnected");
 	});
 
+	socket.on("playerJoined", msg => {
+		//TODO: update state
+		io.emit("playerJoined", msg);
+	});
+
 	socket.on("chatMessage", msg => {
-		console.log("Received chatMessage");
-		console.log(msg);
-		//DEBUG
 		io.emit("chatMessage", msg);
 	});
+
+	socket.on("diceRoll", msg => {
+		io.emit("diceRoll", msg);
+	});
+
 
 	socket.on("gameAction", action => {
 		console.log("Received action: " + action.type);

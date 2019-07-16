@@ -9,7 +9,7 @@ export default class MapImage extends LoadedImage {
 		if (!this.state.image) 
 			return null;
 
-		console.log("Rendering map [" + this.props.id + "]");
+		//console.log("Rendering map [" + this.props.id + "]");
 		//console.log("x=" + this.state.x + ", y=" + this.state.y);
 		//console.log("w=" + w + ", h=" + h);
 

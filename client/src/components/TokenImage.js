@@ -64,7 +64,7 @@ export default class TokenImage extends LoadedImage {
 		let drawDecorations = this.props.drawDecorations && (!this.state.isDragging);
 		let drawPopup = this.state.drawPopup && (!this.state.isDragging);
 
-		console.log("Rendering token [" + this.props.id + "]");
+		//console.log("Rendering token [" + this.props.id + "]");
 		//console.log("x=" + this.state.x + ", y=" + this.state.y);
 		//console.log("w=" + w + ", h=" + h);
 

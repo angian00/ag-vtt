@@ -13,6 +13,7 @@ book
 folder
 map-marked
 globe-europe
+sticky-note
 
 heart
 ghost
@@ -23,3 +24,4 @@ hand-holding-heart
 hand-holding-usd
 drumstick-bite
 street-view
+bomb

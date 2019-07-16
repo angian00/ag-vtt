@@ -15,7 +15,6 @@ class MapPanel extends Component {
 		super(props);
 
 		//DEBUG
-		console.log("MapPanel constructor - Moving token");
 		this.props.moveToken("dwarf", 0, 0);
 		//
 	}
@@ -25,8 +24,8 @@ class MapPanel extends Component {
 		let mapMetadata = this.props.mapMetadata;
 		let viewMetadata = this.props.viewMetadata;
 
-		console.log("tokenDraggedHandler");
-		console.log("x=" + x + ", y=" + y);
+		//console.log("tokenDraggedHandler");
+		//console.log("x=" + x + ", y=" + y);
 
 		const snapToGrid = true; //TODO: move to option/metadata
 		if (snapToGrid) {
@@ -47,7 +46,7 @@ class MapPanel extends Component {
 
 		x /= viewMetadata.mapScaleFactor;
 		y /= viewMetadata.mapScaleFactor;
-		console.log("tokenDraggedHandler - Moving token");
+
 		this.props.moveToken(tokenId, x, y);
 	}
 
@@ -56,7 +55,7 @@ class MapPanel extends Component {
 		if (!this.props.mapMetadata)
 			return null;
 
-		console.log("MapPanel.render()");
+		//console.log("MapPanel.render()");
 		//console.log(this.props.mapMetadata);
 		//console.log(this.props.viewMetadata);
 		//console.log(this.props.tokenPositions);
@@ -71,7 +70,7 @@ class MapPanel extends Component {
 				<Stage width={mapW*mapScaleFactor} height={mapH*mapScaleFactor}>
 					<Layer>
 						<MapImage src="/images/dungeon_map.jpg" id="map" 
-							mapScaleFactor={mapScaleFactor} />
+							scaleFactor={mapScaleFactor} />
 					</Layer>
 					<Layer>
 						<GridLines 

@@ -15,12 +15,22 @@ export default class ChatPanel extends Component {
 	}
 
 	componentDidMount() {
-		socket.on("chatMessage", data => { 
-			this.state.msgQueue.push(data);
+		socket.on("playerJoined", data => { 
+			this.state.msgQueue.push({msgType: "playerJoined", ...data});
 			this.setState({ msgQueue: this.state.msgQueue });
 		});
 		
-		socket.emit("chatMessage", { sender: this.user.name, text: "Hello" });
+		socket.on("chatMessage", data => { 
+			this.state.msgQueue.push({msgType: "chatMessage", ...data});
+			this.setState({ msgQueue: this.state.msgQueue });
+		});
+		
+		socket.on("diceRoll", data => { 
+			this.state.msgQueue.push({msgType: "diceRoll", ...data});
+			this.setState({ msgQueue: this.state.msgQueue });
+		});
+		
+		socket.emit("playerJoined", { sender: this.user.name });
 	}
 
 	handleInputChange(e) {
@@ -37,17 +47,39 @@ export default class ChatPanel extends Component {
 	}
 
 
+	renderMsg(m, i) {
+		let msgBody;
+
+		if (m.msgType === "playerJoined") {
+			msgBody = "-- joined the game";
+
+		} else if (m.msgType === "chatMessage") {
+			msgBody = m.text;
+
+		} else if (m.msgType === "diceRoll") {
+			msgBody = "-- rolled " + m.dNum + m.dType + ": ";
+			for (let iDice=0; iDice < m.dNum; iDice++) {
+				msgBody += m.result[iDice] + " ";
+			}
+
+		} else {
+			msgBody = "??? Unknown message type: " + m.msgType;
+		}
+
+		return (
+			<div key={i} className="chat-message">
+				<div className="chat-sender">{m.sender}</div>
+				<div className="chat-text">{msgBody}</div>
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div id="chatPanel" className="text-panel">
 				<div style={{ width: "100%" }}>
 				{
-					this.state.msgQueue.map((m, i) =>
-						<div key={i} className="chat-message">
-							<div className="chat-sender">{m.sender}</div>
-							<div className="chat-text">{m.text}</div>
-						</div>
-					)
+					this.state.msgQueue.map((m, i) => this.renderMsg(m, i))
 				}
 				</div>
 

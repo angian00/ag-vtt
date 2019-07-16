@@ -10,13 +10,14 @@
 - dice rolling: 
 	v dialog
 	- shortcuts cambio focus (x, d)
-	- update chat
-	- update char stats
-
+	v update chat
 
 - refactoring
+	- integrate in redux
+		- dice rolling
+		- ChatPanel
 	- reducers
-	- aggiungere proptypes a tutti i componenti
+	- add propTypes declaration to all React components
 
 
 - load initial state as a sync HTTP req from redux
@@ -25,21 +26,26 @@
 	- gm (can view everything)
 	- own pc
 	- other pc
-	- monsters
 
 - token rotation (transformer)
 
 
-
 ### v0.x
+
+- web design:
+	- prototyping
+	- css styles
 
 - drag decorations with token (to avoid flash after drag ends)
 
-- add new token
+- "add new token" operation
 
 - design architecture for pluggable rules/tools/macros
 
-- movement animations (arrows with fading out)
+- animations:
+	- movement (arrows with fading out)
+	- dice rolling
+
 - make fog of war irregular
 - blur filter for visitedTiles
 
@@ -48,7 +54,6 @@
 	+ user provisioning
 
 - gm tools
-	- dice rolls
 	- handouts
 	- sketches and annotations on map
 
@@ -60,6 +65,4 @@
 		
 
 + line-of-sight occlusion editor
-+ token library management
-+ macros; RPG system ruleset
 

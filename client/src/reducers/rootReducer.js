@@ -2,20 +2,28 @@ import socket from '../utils/websocket';
 
 
 export default function(localState = initialLocalState(), action) {
-	console.log(action);
+	//console.log(action);
 
 	switch (action.type) {
-		case 'MOVE_TOKEN':
-			//TODO: local action validation
-			socket.emit("gameAction", action);
-
-			return localState;
-
+		// ------ local actions ------
 		case 'SET_ZOOM':
-			//TODO: save zoom in local state
+			return {
+				...localState,
+				viewMetadata: computeViewMetadata(localState.mapMetadata, action.viewScale),
+			};
+
+		case 'ROLL_DICE':
+			socket.emit("diceRoll", {sender: "test", ...action});
+			return localState;
+
+		// ------ game actions ------
+		case 'MOVE_TOKEN':
+			//TODO: local validation
+			socket.emit("gameAction", action);
 			return localState;
 
 
+		// ------ state update from server ------
 		case 'STATE_UPDATE':
 			console.log("Updating state");
 
@@ -23,6 +31,7 @@ export default function(localState = initialLocalState(), action) {
 				...action.state,
 				viewMetadata: computeViewMetadata(action.state.mapMetadata, localState.viewMetadata.viewScale),
 			};
+
 
 		default:
 			return localState;

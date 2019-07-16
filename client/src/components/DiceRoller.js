@@ -1,8 +1,23 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
+import { connect } from "react-redux";
+
+import { rollDice } from '../actions';
 
 
-export default class DiceRoller extends Component {
+class DiceRoller extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {modalIsOpen: true};
+	}
+
+	roll() {
+		this.props.rollDice("d6", 3, [1, 2, 3]);
+
+		this.closeModal();
+	}
+
 	closeModal() {
 		this.setState({modalIsOpen: false});
 	}
@@ -10,8 +25,7 @@ export default class DiceRoller extends Component {
 	render() {
 		return (
 			<ReactModal
-				//isOpen={this.state && this.state.modalIsOpen}
-				isOpen={true}
+				isOpen={this.state.modalIsOpen}
 				onRequestClose={this.closeModal.bind(this)}
 				contentLabel="Dice Roller"
 				className="tool-dialog">
@@ -26,7 +40,7 @@ export default class DiceRoller extends Component {
 				</div>
 
 				<div>
-					<label htmlFor="diceType"># of dice</label>
+					<label htmlFor="diceNum"># of dice</label>
 					<div>
 						<span>x</span>
 						&nbsp;
@@ -34,6 +48,7 @@ export default class DiceRoller extends Component {
 					</div>
 				</div>
 
+				{/*
 				<div className="optional">
 					<label htmlFor="target">type of effect</label>
 					<div>
@@ -55,9 +70,16 @@ export default class DiceRoller extends Component {
 						</select>
 					</div>
 				</div>
+				*/}
 
-				<input type="submit" onClick={this.closeModal.bind(this)} value="Roll!" />
+				<input type="submit" onClick={this.roll.bind(this)} value="Roll!" />
 			</ReactModal>
 		);
 	}
 }
+
+
+export default connect(
+	state => state.isDiceRollerOpen || {},
+	{ rollDice }
+)(DiceRoller);

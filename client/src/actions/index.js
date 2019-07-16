@@ -8,20 +8,21 @@ export const moveToken = (tokenId, x, y) => {
 }
 
 
-export const rollDice = (dType, dNum) => {
+//----- local actions -----
+export const setZoom = (viewScale) => {
 	return {
-		type: 'ROLL_DICE',
-		dType: dType,
-		dNum: dNum
+		type: 'SET_ZOOM',
+		viewScale: viewScale,
 	}
 }
 
 
-//----- local actions -----
-export const setZoom = (zoomScale) => {
+export const rollDice = (dType, dNum, result) => {
 	return {
-		type: 'SET_ZOOM',
-		zoomScale: zoomScale,
+		type: 'ROLL_DICE',
+		dType: dType,
+		dNum: dNum,
+		result: result
 	}
 }
 

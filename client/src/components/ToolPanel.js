@@ -8,9 +8,9 @@ import { runTool } from '../utils/tools.js';
 
 class ToolPanel extends Component {
 	sendSetZoom(e) {
-		let zoomScale = parseInt(e.target.value);
-		console.log("zoomScale: " + zoomScale);
-		this.props.setZoom(zoomScale);
+		let viewScale = parseInt(e.target.value);
+		console.log("viewScale: " + viewScale);
+		this.props.setZoom(viewScale);
 	}
 
 	render() {
@@ -24,7 +24,7 @@ class ToolPanel extends Component {
 				</div>
 				<div className="tools-group">
 					<div className="tools-group-label">Zoom level (px per ft)</div>
-					<select onChange={this.sendSetZoom.bind(this)} value={this.props.zoomScale}>
+					<select onChange={this.sendSetZoom.bind(this)} value={this.props.viewScale}>
 						<option>10</option>
 						<option>15</option>
 						<option>30</option>
@@ -45,10 +45,10 @@ class ToolPanel extends Component {
 
 function mapStateToProps(state) {
 	if (state) {
-		const { mapMetadata } = state || null;
-		return { zoomScale: mapMetadata.zoomScale };
+		const { viewMetadata } = state || null;
+		return { viewScale: viewMetadata.viewScale };
 	} else
-		return { zoomScale: 15 };
+		return { viewScale: 15 };
 }
 
 export default connect(
