@@ -11,6 +11,7 @@
 	v dialog
 	- shortcuts cambio focus (x, d)
 	v update chat
+	- form validation 
 
 - refactoring
 	- integrate in redux
@@ -18,7 +19,6 @@
 		- ChatPanel
 	- reducers
 	- add propTypes declaration to all React components
-
 
 - load initial state as a sync HTTP req from redux
 

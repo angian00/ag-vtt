@@ -14,7 +14,10 @@ export default function(localState = initialLocalState(), action) {
 
 		case 'ROLL_DICE':
 			socket.emit("diceRoll", {sender: "test", ...action});
-			return localState;
+			return {
+				...localState,
+				isDiceRollerOpen: false,
+			};
 
 		// ------ game actions ------
 		case 'MOVE_TOKEN':

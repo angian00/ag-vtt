@@ -17,12 +17,13 @@ export const setZoom = (viewScale) => {
 }
 
 
-export const rollDice = (dType, dNum, result) => {
+export const rollDice = (dType, dNum, rolls, total) => {
 	return {
 		type: 'ROLL_DICE',
 		dType: dType,
 		dNum: dNum,
-		result: result
+		rolls: rolls,
+		total: total,
 	}
 }
 

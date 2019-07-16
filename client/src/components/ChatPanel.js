@@ -59,8 +59,11 @@ export default class ChatPanel extends Component {
 		} else if (m.msgType === "diceRoll") {
 			msgBody = "-- rolled " + m.dNum + m.dType + ": ";
 			for (let iDice=0; iDice < m.dNum; iDice++) {
-				msgBody += m.result[iDice] + " ";
+				msgBody += m.rolls[iDice] + (iDice === m.dNum - 1 ? "" : " + ");
 			}
+
+			if (m.dNum > 1)
+				msgBody += " = " + m.total;
 
 		} else {
 			msgBody = "??? Unknown message type: " + m.msgType;

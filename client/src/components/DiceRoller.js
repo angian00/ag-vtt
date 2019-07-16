@@ -3,24 +3,52 @@ import ReactModal from "react-modal";
 import { connect } from "react-redux";
 
 import { rollDice } from '../actions';
+import { roll } from '../utils/random';
 
 
 class DiceRoller extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {modalIsOpen: true};
+		this.state = {
+			diceType: "20",
+			diceNum: 1,
+		};
+	}
+
+
+	typeInputHandler(e) {
+		this.setState({diceType: e.target.value});
+	}
+
+	numInputHandler(e) {
+		this.setState({diceNum: e.target.value});
 	}
 
 	clickHandler() {
-		this.props.rollDice("d6", 3, [1, 2, 3]);
+		let diceType;
 
-		this.closeModal();
+		if (this.state.diceType === "00")
+			diceType = "100";
+		else if (this.state.diceType === "0")
+			diceType = "10";
+		else
+			diceType = this.state.diceType;
+
+
+		let maxRoll = parseInt(diceType);
+
+		let rolls = [];
+		let total = 0;
+		for (let i=0; i < this.state.diceNum; i++) {
+			let currRoll = roll(maxRoll);
+			rolls.push(currRoll);
+			total += currRoll;
+		}
+
+		this.props.rollDice("d" + diceType, this.state.diceNum, rolls, total);
 	}
 
-	inputHandler(e) {
-		//TODO
-	}
 
 	closeModal() {
 		this.setState({modalIsOpen: false});
@@ -40,8 +68,8 @@ class DiceRoller extends Component {
 					<div>
 						<span>d</span>
 						&nbsp;
-						<input id="diceType" name="diceType" type="text" size="3" value="6" 
-							onChange={this.inputHandler.bind(this)} />
+						<input id="diceType" name="diceType" type="text" size="3" value={this.state.diceType}
+							onChange={this.typeInputHandler.bind(this)} />
 					</div>
 				</div>
 
@@ -50,8 +78,8 @@ class DiceRoller extends Component {
 					<div>
 						<span>x</span>
 						&nbsp;
-						<input id="diceNum" name="diceNum" type="text" size="3" value="3"
-							onChange={this.inputHandler.bind(this)} />
+						<input id="diceNum" name="diceNum" type="text" size="3" value={this.state.diceNum}
+							onChange={this.numInputHandler.bind(this)} />
 					</div>
 				</div>
 
@@ -87,6 +115,6 @@ class DiceRoller extends Component {
 
 
 export default connect(
-	state => state.isDiceRollerOpen || {},
+	state => ({ isOpen: state.isDiceRollerOpen }),
 	{ rollDice }
 )(DiceRoller);
