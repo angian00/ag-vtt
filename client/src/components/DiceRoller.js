@@ -12,10 +12,14 @@ class DiceRoller extends Component {
 		this.state = {modalIsOpen: true};
 	}
 
-	roll() {
+	clickHandler() {
 		this.props.rollDice("d6", 3, [1, 2, 3]);
 
 		this.closeModal();
+	}
+
+	inputHandler(e) {
+		//TODO
 	}
 
 	closeModal() {
@@ -28,6 +32,7 @@ class DiceRoller extends Component {
 				isOpen={this.state.modalIsOpen}
 				onRequestClose={this.closeModal.bind(this)}
 				contentLabel="Dice Roller"
+				ariaHideApp={false}
 				className="tool-dialog">
 				<h3>Dice Roller</h3>
 				<div>
@@ -35,7 +40,8 @@ class DiceRoller extends Component {
 					<div>
 						<span>d</span>
 						&nbsp;
-						<input id="diceType" name="diceType" type="text" size="3" value="6" />
+						<input id="diceType" name="diceType" type="text" size="3" value="6" 
+							onChange={this.inputHandler.bind(this)} />
 					</div>
 				</div>
 
@@ -44,7 +50,8 @@ class DiceRoller extends Component {
 					<div>
 						<span>x</span>
 						&nbsp;
-						<input id="diceNum" name="diceNum" type="text" size="3" value="3" />
+						<input id="diceNum" name="diceNum" type="text" size="3" value="3"
+							onChange={this.inputHandler.bind(this)} />
 					</div>
 				</div>
 
@@ -72,7 +79,7 @@ class DiceRoller extends Component {
 				</div>
 				*/}
 
-				<input type="submit" onClick={this.roll.bind(this)} value="Roll!" />
+				<input type="submit" onClick={this.clickHandler.bind(this)} value="Roll!" />
 			</ReactModal>
 		);
 	}
