@@ -16,6 +16,8 @@
 	- converted to FogOfWar and GridLines to functional components
 	- moved LoadedImage, MapImage, TokenImage to their own classes
 	- reduced initialLocalState knowledge to the minimum
+	- redux integration
+		- ChatPanel
 
 
 ## [v0.2] - 2019-07-13

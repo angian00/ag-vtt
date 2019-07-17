@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { createStore, applyMiddleware } from 'redux';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-//import createSocketIoMiddleware from 'redux-socket.io';
 
 
 import App from './App';
@@ -18,6 +16,15 @@ let store = createStore(rootReducer);
 socket.on("stateUpdate", (payload) => 
 	store.dispatch({type: "STATE_UPDATE", state: payload }) 
 );
+
+let chatEvents = ["playerJoined", "chatMessage", "diceRoll"];
+for (let eventType of chatEvents) {
+	socket.on(eventType, payload => {
+		store.dispatch({type: "CHAT_EVENT", eventData: {msgType: eventType, ...payload}});
+	});
+}
+
+//TODO: send playerJoined
 
 ReactDOM.render(
 	<Provider store={store}>

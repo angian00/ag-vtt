@@ -1,36 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import socket from '../utils/websocket';
+import { sendChatMessage } from '../actions';
 
 
-export default class ChatPanel extends Component {
+
+class ChatPanel extends Component {
 	constructor(props) {
 		super(props);
-		this.user = JSON.parse(localStorage.user);
 
 		this.state = {
-			inputMsg: "",
-			msgQueue: []
+			inputMsg: ""
 		};
-	}
-
-	componentDidMount() {
-		socket.on("playerJoined", data => { 
-			this.state.msgQueue.push({msgType: "playerJoined", ...data});
-			this.setState({ msgQueue: this.state.msgQueue });
-		});
-		
-		socket.on("chatMessage", data => { 
-			this.state.msgQueue.push({msgType: "chatMessage", ...data});
-			this.setState({ msgQueue: this.state.msgQueue });
-		});
-		
-		socket.on("diceRoll", data => { 
-			this.state.msgQueue.push({msgType: "diceRoll", ...data});
-			this.setState({ msgQueue: this.state.msgQueue });
-		});
-		
-		socket.emit("playerJoined", { sender: this.user.name });
 	}
 
 	handleInputChange(e) {
@@ -39,7 +20,7 @@ export default class ChatPanel extends Component {
 
 	handleSubmit(e) {
 		if (this.state.inputMsg !== "") {
-			socket.emit("chatMessage", { sender: this.user.name, text: this.state.inputMsg });
+			this.props.sendChatMessage(this.state.inputMsg);
 			this.setState({ inputMsg: "" });
 		}
 
@@ -82,7 +63,7 @@ export default class ChatPanel extends Component {
 			<div id="chatPanel" className="text-panel">
 				<div style={{ width: "100%" }}>
 				{
-					this.state.msgQueue.map((m, i) => this.renderMsg(m, i))
+					this.props.msgQueue.map((m, i) => this.renderMsg(m, i))
 				}
 				</div>
 
@@ -100,3 +81,7 @@ export default class ChatPanel extends Component {
 	}
 }
 
+export default connect(
+	state => ({ msgQueue: state.msgQueue || [] }),
+	{ sendChatMessage }
+)(ChatPanel);

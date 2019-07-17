@@ -35,16 +35,19 @@ io.on("connection", socket => {
 		console.log("Client disconnected");
 	});
 
+
 	socket.on("playerJoined", msg => {
 		//TODO: update state
 		io.emit("playerJoined", msg);
 	});
 
 	socket.on("chatMessage", msg => {
+		console.log("chatMessage received");
 		io.emit("chatMessage", msg);
 	});
 
 	socket.on("diceRoll", msg => {
+		console.log("diceRoll received");
 		io.emit("diceRoll", msg);
 	});
 

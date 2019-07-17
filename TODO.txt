@@ -2,6 +2,7 @@
 
 ## Open problems
 - intermittent problems with snap-to-grid
+- flashing token popup info
 
 
 ## Milestones
@@ -10,16 +11,24 @@
 
 - refactoring
 	- integrate in redux
-		- ChatPanel
-	- reducers
+		- login page (username)
 	- add propTypes declaration to all React components
+	- reducers
 
 - load initial state as a sync HTTP req from redux
+
+
+### v0.4
 
 - different info visualized for different roles:
 	- gm (can view everything)
 	- own pc
 	- other pc
+
+
+- tools
+	- CRUD campaign/encounter
+	- Add new token
 
 - token rotation (transformer)
 
@@ -29,6 +38,8 @@
 - web design:
 	- prototyping
 	- css styles
+
+- favicon etc.
 
 - drag decorations with token (to avoid flash after drag ends)
 

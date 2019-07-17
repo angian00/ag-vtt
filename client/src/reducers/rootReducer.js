@@ -34,12 +34,17 @@ export default function(localState = initialLocalState(), action) {
 					return localState;
 			}
 
+		case 'CHAT_MESSAGE':
+			socket.emit("chatMessage", {sender: localState.username, text: action.text});
+			return localState;
+
 		case 'ROLL_DICE':
 			socket.emit("diceRoll", {sender: localState.username, ...action});
 			return {
 				...localState,
 				isDiceRollerOpen: false,
 			};
+
 
 		// ------ game actions ------
 		case 'MOVE_TOKEN':
@@ -53,10 +58,21 @@ export default function(localState = initialLocalState(), action) {
 			console.log("Updating state");
 
 			return {
+				...localState,
 				...action.state,
 				viewMetadata: computeViewMetadata(action.state.mapMetadata, localState.viewMetadata.viewScale),
 			};
 
+		case 'CHAT_EVENT':
+			console.log("CHAT_EVENT");
+			console.log(localState);
+			return {
+				...localState,
+				msgQueue: [
+					...localState.msgQueue, 
+					action.eventData
+				]
+			};
 
 		default:
 			return localState;
@@ -78,12 +94,13 @@ function initialLocalState() {
 
 
 	return {
-		username: "zzz",
+		username: "localUser", //TODO: set username from LoginPage
 		mapMetadata: mapMetadata,
 		viewMetadata: computeViewMetadata(mapMetadata, viewScale),
 		visibleTiles: [],
 		visitedTiles: [],
 		tokenPositions: {dwarf: {x: -999, y: -999}}, //DEBUG
+		msgQueue: [],
 	};	
 
 }
