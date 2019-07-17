@@ -16,6 +16,20 @@ export const setZoom = (viewScale) => {
 	}
 }
 
+export const runTool = (tool) => {
+	return {
+		type: 'RUN_TOOL',
+		tool: tool,
+	}
+}
+
+export const closeTool = (tool) => {
+	return {
+		type: 'CLOSE_TOOL',
+		tool: tool,
+	}
+}
+
 
 export const rollDice = (dType, dNum, rolls, total) => {
 	return {

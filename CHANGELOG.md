@@ -3,7 +3,11 @@
 ## Unreleased yet
 ### Added
 - basic wiring of keyboard shortcuts
-- basic popup for char token
+- info popup for tokens
+- DiceRoller tool
+	- modal div
+	- shortcuts to change focus (x, d)
+	- websocket round-trip 
 
 
 ### Changed

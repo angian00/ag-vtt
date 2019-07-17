@@ -12,8 +12,30 @@ export default function(localState = initialLocalState(), action) {
 				viewMetadata: computeViewMetadata(localState.mapMetadata, action.viewScale),
 			};
 
+		case 'RUN_TOOL':
+			switch (action.tool) {
+				case 'DiceRoller':
+					return {
+						...localState,
+						isDiceRollerOpen: true,
+					};
+				default:
+					return localState;
+			}
+
+		case 'CLOSE_TOOL':
+			switch (action.tool) {
+				case 'DiceRoller':
+					return {
+						...localState,
+						isDiceRollerOpen: false,
+					};
+				default:
+					return localState;
+			}
+
 		case 'ROLL_DICE':
-			socket.emit("diceRoll", {sender: "test", ...action});
+			socket.emit("diceRoll", {sender: localState.username, ...action});
 			return {
 				...localState,
 				isDiceRollerOpen: false,
@@ -56,6 +78,7 @@ function initialLocalState() {
 
 
 	return {
+		username: "zzz",
 		mapMetadata: mapMetadata,
 		viewMetadata: computeViewMetadata(mapMetadata, viewScale),
 		visibleTiles: [],

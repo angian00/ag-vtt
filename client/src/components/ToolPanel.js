@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { setZoom } from '../actions';
+import { setZoom, runTool } from '../actions';
 import Shortcut from './Shortcut';
-import { runTool } from '../utils/tools.js';
 
 
 class ToolPanel extends Component {
 	sendSetZoom(e) {
 		let viewScale = parseInt(e.target.value);
-		console.log("viewScale: " + viewScale);
 		this.props.setZoom(viewScale);
 	}
 
@@ -34,7 +32,7 @@ class ToolPanel extends Component {
 				<div className="tools-group">
 					<div className="tools-group-label">Dice</div>
 					<Shortcut name="toolRollDice">
-						<button onClick={()=>runTool("rollDice")}>Roll dice</button>
+						<button onClick={()=>this.props.runTool("DiceRoller")}>Roll dice</button>
 					</Shortcut>
 				</div>
 			</div>
@@ -53,5 +51,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ setZoom }
+	{ setZoom, runTool }
 )(ToolPanel);

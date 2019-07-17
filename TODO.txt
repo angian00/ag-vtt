@@ -7,15 +7,9 @@
 ## Milestones
 
 ### v0.3
-- dice rolling: 
-	v dialog
-	- shortcuts cambio focus (x, d)
-	v update chat
-	- form validation 
 
 - refactoring
 	- integrate in redux
-		- dice rolling
 		- ChatPanel
 	- reducers
 	- add propTypes declaration to all React components

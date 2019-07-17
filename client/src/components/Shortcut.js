@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { runTool } from '../utils/tools';
+import { connect } from "react-redux";
+
+import { runTool } from '../actions';
 
 
+let actions = null;
 let registeredShortcuts = [];
 
 const shortcuts = {
@@ -9,7 +12,7 @@ const shortcuts = {
 		if (event.key !== 'r')
 			return false;
 		
-		runTool("rollDice");
+		actions.runTool("DiceRoller");
 		return true;
 	},
 
@@ -30,7 +33,13 @@ document.addEventListener('keydown', handleKeyDown);
 
 
 
-export default class Shortcut extends Component {
+class Shortcut extends Component {
+	constructor(props) {
+		super(props);
+
+		actions = this.props;
+	}
+
 	componentDidMount() {
 		if (!registeredShortcuts.includes(this.props.name)) {
 			registeredShortcuts = [
@@ -50,3 +59,17 @@ export default class Shortcut extends Component {
 		return this.props.children || null;
 	}
 }
+
+
+function mapStateToProps(state) {
+	if (state) {
+		const { viewMetadata } = state || null;
+		return { viewScale: viewMetadata.viewScale };
+	} else
+		return { viewScale: 15 };
+}
+
+export default connect(
+	mapStateToProps,
+	{ runTool }
+)(Shortcut);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { connect } from "react-redux";
 
-import { rollDice } from '../actions';
+import { rollDice, closeTool } from '../actions';
 import { roll } from '../utils/random';
 
 
@@ -10,12 +10,41 @@ class DiceRoller extends Component {
 	constructor(props) {
 		super(props);
 
+		this.typeInput = React.createRef();
+		this.numInput = React.createRef();
+
 		this.state = {
 			diceType: "20",
 			diceNum: 1,
 		};
 	}
 
+	componentDidMount() {
+		if (this.typeInput.current) {
+			console.log(this.typeInput.current);
+			this.typeInput.current.focus();
+		}
+	}
+
+	keyHandler(e) {
+		//console.log("key handled: " + e.key);
+
+		if (e.key === "Enter")
+			this.clickHandler();
+		
+		else if (e.key === "x" || e.key === "X")
+			this.numInput.current.focus();
+		
+		else if (e.key === "d" || e.key === "D")
+			this.typeInput.current.focus();
+
+		if ((e.key !== "Tab") && (isNaN(parseInt(e.key))) )
+			e.preventDefault();
+	}
+
+	focusHandler(e) {
+		e.target.select();
+	}
 
 	typeInputHandler(e) {
 		this.setState({diceType: e.target.value});
@@ -50,18 +79,16 @@ class DiceRoller extends Component {
 	}
 
 
-	closeModal() {
-		this.setState({modalIsOpen: false});
-	}
-
 	render() {
 		return (
 			<ReactModal
-				isOpen={this.state.modalIsOpen}
-				onRequestClose={this.closeModal.bind(this)}
+				isOpen={this.props.isOpen}
+				onRequestClose={e => {this.props.closeTool("DiceRoller")}}
 				contentLabel="Dice Roller"
 				ariaHideApp={false}
-				className="tool-dialog">
+				className="tool-dialog" 
+				onAfterOpen={() => this.typeInput.current && this.typeInput.current.focus()} >
+
 				<h3>Dice Roller</h3>
 				<div>
 					<label htmlFor="diceType">type of dice</label> 
@@ -69,7 +96,9 @@ class DiceRoller extends Component {
 						<span>d</span>
 						&nbsp;
 						<input id="diceType" name="diceType" type="text" size="3" value={this.state.diceType}
-							onChange={this.typeInputHandler.bind(this)} />
+							onKeyDown={this.keyHandler.bind(this)} onChange={this.typeInputHandler.bind(this)} 
+							onFocus={this.focusHandler}
+							ref={this.typeInput} />
 					</div>
 				</div>
 
@@ -79,7 +108,9 @@ class DiceRoller extends Component {
 						<span>x</span>
 						&nbsp;
 						<input id="diceNum" name="diceNum" type="text" size="3" value={this.state.diceNum}
-							onChange={this.numInputHandler.bind(this)} />
+							onKeyPress={this.keyHandler.bind(this)} onChange={this.numInputHandler.bind(this)}
+							onFocus={this.focusHandler}
+							ref={this.numInput} />
 					</div>
 				</div>
 
@@ -116,5 +147,5 @@ class DiceRoller extends Component {
 
 export default connect(
 	state => ({ isOpen: state.isDiceRollerOpen }),
-	{ rollDice }
+	{ rollDice, closeTool }
 )(DiceRoller);
