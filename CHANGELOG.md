@@ -8,6 +8,8 @@
 	- modal div
 	- shortcuts to change focus (x, d)
 	- websocket round-trip 
+- introduced redux-thunk to manage api calls in reducers:
+	- authentication
 
 
 ### Changed

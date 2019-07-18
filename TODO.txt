@@ -11,20 +11,24 @@
 
 - refactoring
 	- integrate in redux
-		- login page (username)
 	- add propTypes declaration to all React components
-	- reducers
+	- split reducers
+	- split actions
+	- extract store configuration
 
 - load initial state as a sync HTTP req from redux
+- add logout button and player info
 
 
 ### v0.4
+- alert actions
 
 - different info visualized for different roles:
 	- gm (can view everything)
 	- own pc
 	- other pc
 
+- pass along auth tokens
 
 - tools
 	- CRUD campaign/encounter

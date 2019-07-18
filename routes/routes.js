@@ -14,6 +14,8 @@ router.post("/users/authenticate", (req, res) => {
 	let username = req.body.username;
 	let pwd = req.body.password;
 
+	console.log("User " + username + " authenticating");
+
 	let user = users.auth(username, pwd);
 	if (user)
 		res.status(200).send(user);

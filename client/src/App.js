@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { PrivateRoute } from "./components/PrivateRoute";
+import history from "./services/history";
 
 import GamePage from "./components/GamePage";
 import LoginPage from "./components/LoginPage";
@@ -9,28 +11,17 @@ import LoginPage from "./components/LoginPage";
 import "./App.css";
 
 
-// setup fake backend
-//import { configureFakeBackend } from './utils/fakeBackend';
-//configureFakeBackend();
-//
-
-
-//FIXME: 
-//use (a fixed version of) 
-//<PrivateRoute exact path="/" render={(props) => <GridPage {...props} store={props.store} />} />
-//to improve performance
-//see https://learnwithparam.com/blog/how-to-pass-props-in-react-router/
-// it seems PrivateRoute component does not properly support render function as a property
-//				<PrivateRoute exact path="/" component={() => <GridPage {...this.props} store={this.props.store} />} />
-//				<Route exact path="/" render={(props) => <GamePage {...props} store={this.props.store} />} />
-
-export default class App extends Component {
+class App extends Component {
     render() {
 		return (
-			<Router>
+			<Router history={history}>
 				<PrivateRoute exact path="/" component={GamePage} />
 				<Route path="/login" component={LoginPage} />
 			</Router>
         );
 	}
 }
+
+export default connect(
+	state => ({username: state.username})
+)(App);

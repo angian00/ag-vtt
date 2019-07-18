@@ -1,18 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import socket from './utils/websocket';
+
 //import rootReducer from './reducers';
 import rootReducer from './reducers/rootReducer';
+import history from "./services/history";
 
 
+let store = createStore(
+	rootReducer,
+	applyMiddleware(thunkMiddleware)
+);
 
-let store = createStore(rootReducer);
+
 socket.on("stateUpdate", (payload) => 
 	store.dispatch({type: "STATE_UPDATE", state: payload }) 
 );

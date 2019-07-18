@@ -1,7 +1,9 @@
+import { combineReducers } from "redux";
+
 import socket from '../utils/websocket';
 
 
-export default function(localState = initialLocalState(), action) {
+export default function customReducer(localState = initialLocalState(), action) {
 	//console.log(action);
 
 	switch (action.type) {
@@ -34,16 +36,33 @@ export default function(localState = initialLocalState(), action) {
 					return localState;
 			}
 
-		case 'CHAT_MESSAGE':
-			socket.emit("chatMessage", {sender: localState.username, text: action.text});
-			return localState;
+		// ------ auth actions ------
+		case 'LOGIN_REQUEST':
+			console.log("rootReducer - LOGIN_REQUEST");
 
-		case 'ROLL_DICE':
-			socket.emit("diceRoll", {sender: localState.username, ...action});
 			return {
 				...localState,
-				isDiceRollerOpen: false,
-			};
+				loginStatus: "LOGGED_IN", //TODO: LOGGING_IN status
+				user: action.user,
+			}
+
+		case 'LOGIN_SUCCESS':
+			console.log("rootReducer - LOGIN_SUCCESS");
+			
+			return {
+				...localState,
+				loginStatus: "LOGGED_IN",
+				user: action.user,
+			}
+
+		case 'LOGOUT':
+			//TODO: actually login
+
+			return {
+				...localState,
+				loginStatus: "LOGGED_OUT",
+				user: null,
+			}
 
 
 		// ------ game actions ------
@@ -51,6 +70,19 @@ export default function(localState = initialLocalState(), action) {
 			//TODO: local validation
 			socket.emit("gameAction", action);
 			return localState;
+
+
+		// ------ chat actions ------
+		case 'CHAT_MESSAGE':
+			socket.emit("chatMessage", {sender: localState.user.name, text: action.text});
+			return localState;
+
+		case 'ROLL_DICE':
+			socket.emit("diceRoll", {sender: localState.user.name, ...action});
+			return {
+				...localState,
+				isDiceRollerOpen: false,
+			};
 
 
 		// ------ state update from server ------
@@ -94,7 +126,8 @@ function initialLocalState() {
 
 
 	return {
-		username: "localUser", //TODO: set username from LoginPage
+		loginStatus: "LOGGED_OUT",
+		//user: "localUser",
 		mapMetadata: mapMetadata,
 		viewMetadata: computeViewMetadata(mapMetadata, viewScale),
 		visibleTiles: [],
@@ -113,3 +146,8 @@ function computeViewMetadata(mapMetadata, viewScale) {
 	}
 }
 
+
+//export default combineReducers({
+  //router: connectRouter(history),
+//  customReducer,
+//});
