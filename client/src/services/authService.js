@@ -25,6 +25,7 @@ export function login(username, password) {
 			if (user) {
 				console.log("authServices - Authentication successful");
 				user.authdata = window.btoa(username + ':' + password);
+				user.name = username;
 				localStorage.setItem('user', JSON.stringify(user));
 			}
 

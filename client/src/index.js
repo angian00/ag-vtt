@@ -11,7 +11,6 @@ import socket from './utils/websocket';
 
 //import rootReducer from './reducers';
 import rootReducer from './reducers/rootReducer';
-import history from "./services/history";
 
 
 let store = createStore(

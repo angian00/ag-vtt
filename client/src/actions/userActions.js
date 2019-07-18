@@ -10,6 +10,7 @@ export function login(username, password) {
 			.then(
 				user => { 
 					console.log("userActions - login successful");
+					console.log(user);
 					dispatch(success(user));
 					history.push('/');
 				},
@@ -27,9 +28,19 @@ export function login(username, password) {
 }
 
 
-export function logout() {
-	authService.logout();
-	return { type: "LOGOUT" };
+export function logout(user) {
+	return dispatch => {
+		console.log("before authService.logout: ");
+		console.log(user);
+
+		authService.logout();
+
+		console.log("after authService.logout: ");
+		console.log(user);
+		//trigger re-validation of PrivateRoute
+		if (user)
+			history.push('/');
+	};
 }
 
 

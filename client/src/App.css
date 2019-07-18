@@ -83,6 +83,19 @@ h3 {
 }
 
 
+#userInfoContainer {
+	float: left;
+}
+
+#sessionInfoContainer {
+	float: right;
+	min-width: 500px;
+}
+
+#userInfoContainer button {
+	margin: 5px 20px;
+}
+
 /* -------- tool -------- */
 .tools-group {
 	flex: 1;

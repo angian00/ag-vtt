@@ -10,7 +10,7 @@
 	- websocket round-trip 
 - introduced redux-thunk to manage api calls in reducers:
 	- authentication
-
+- logout 
 
 ### Changed
 - refactoring

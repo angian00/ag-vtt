@@ -6,8 +6,10 @@ let staticUsers = [
 
 function auth(username, password) {
 	for (let u of staticUsers) {
-		if ((u.name == username) && (u.password == password) )
+		if ((u.name == username) && (u.password == password) ) {
+			//TODO: remove password password
 			return u;
+		}
 	}
 
 	return null;

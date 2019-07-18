@@ -56,8 +56,8 @@ export default function customReducer(localState = initialLocalState(), action) 
 			}
 
 		case 'LOGOUT':
-			//TODO: actually login
-
+			console.log("rootReducer - LOGOUT");
+			
 			return {
 				...localState,
 				loginStatus: "LOGGED_OUT",
@@ -88,6 +88,7 @@ export default function customReducer(localState = initialLocalState(), action) 
 		// ------ state update from server ------
 		case 'STATE_UPDATE':
 			console.log("Updating state");
+			console.log(localState);
 
 			return {
 				...localState,
@@ -125,9 +126,17 @@ function initialLocalState() {
 	let viewScale = 30;
 
 
+	let user = localStorage.getItem("user");
+	let loginStatus;	
+	if (user) {
+		loginStatus = "LOGGED_IN";
+	} else {
+		loginStatus = "LOGGED_OUT";
+	}
+
 	return {
-		loginStatus: "LOGGED_OUT",
-		//user: "localUser",
+		loginStatus: loginStatus,
+		user: user,
 		mapMetadata: mapMetadata,
 		viewMetadata: computeViewMetadata(mapMetadata, viewScale),
 		visibleTiles: [],
