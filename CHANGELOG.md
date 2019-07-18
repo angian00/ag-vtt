@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased yet
+## [v0.3] - 2019-07-18
 ### Added
 - basic wiring of keyboard shortcuts
 - info popup for tokens
