@@ -10,7 +10,9 @@
 	- websocket round-trip 
 - introduced redux-thunk to manage api calls in reducers:
 	- authentication
-- logout 
+	- initial sync of gameState as an HTTP REST req
+- logout button
+
 
 ### Changed
 - refactoring

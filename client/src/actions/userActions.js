@@ -10,7 +10,6 @@ export function login(username, password) {
 			.then(
 				user => { 
 					console.log("userActions - login successful");
-					console.log(user);
 					dispatch(success(user));
 					history.push('/');
 				},

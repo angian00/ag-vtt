@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const users = require("../models/users");
-
+var gameState = require("../controllers/GameState");
 
 
 router.get("/", (req, res) => {
@@ -21,6 +21,12 @@ router.post("/users/authenticate", (req, res) => {
 		res.status(200).send(user);
 	else
 		res.status(401).send({ message: "Invalid credentials" });
+});
+
+
+
+router.get("/gameState", (req, res) => {
+	res.send(gameState).status(200);
 });
 
 /*

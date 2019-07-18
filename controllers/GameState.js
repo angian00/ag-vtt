@@ -4,6 +4,13 @@ const _ = require("lodash");
 class GameState {
 	constructor() {
 		this.state = this.init();
+
+		//DEBUG
+		this.performAction({
+			type: 'MOVE_TOKEN',
+			tokenId: "dwarf", 
+			x: 100, y: 100,
+		});
 	}
 
 	init() {
@@ -102,4 +109,5 @@ function updateVisTiles(state, xToken, yToken) {
 
 
 
-module.exports = GameState;
+module.exports = new GameState();
+//module.exports = GameState;

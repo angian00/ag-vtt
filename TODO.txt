@@ -7,15 +7,6 @@
 
 ## Milestones
 
-### v0.3
-
-- refactoring
-	- add propTypes declaration to all React components
-	- spostare logica socket da reducer ad azioni
-
-- load initial state as a sync HTTP req from redux
-
-
 ### v0.4
 - alert actions
 
@@ -25,6 +16,10 @@
 	- other pc
 
 - pass along auth tokens
+
+- refactoring
+	- add propTypes declaration to all React components
+
 
 - tools
 	- CRUD campaign/encounter

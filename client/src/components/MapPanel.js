@@ -7,16 +7,13 @@ import FogOfWar from './FogOfWar';
 import MapImage from './MapImage';
 import TokenImage from './TokenImage';
 
-import { moveToken } from '../actions/gameActions';
+import { syncGameState, moveToken } from '../actions/gameActions';
 
 
 class MapPanel extends Component {
-	constructor(props) {
-		super(props);
-
-		//DEBUG
-		this.props.moveToken("dwarf", 0, 0);
-		//
+	componentWillMount() {
+		this.props.syncGameState();
+		//this.props.moveToken("dwarf", 200, 200);
 	}
 
 
@@ -109,7 +106,8 @@ function computeViewMetadata(mapMetadata, viewScale) {
 
 
 function mapStateToProps(state) {
-	if (!state)
+	console.log(state);
+	if (!state || !state.gameState)
 		return {};
 
 	let viewMetadata = computeViewMetadata(state.gameState.mapMetadata, state.ui.viewScale);
@@ -125,5 +123,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ moveToken }
+	{ syncGameState, moveToken }
 )(MapPanel);

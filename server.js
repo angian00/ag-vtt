@@ -5,9 +5,9 @@ const socketIo = require("socket.io");
 const port = process.env.PORT || 4001;
 
 
-const GameState = require("./controllers/GameState");
-var gameState = new GameState();
-
+//const GameState = require("./controllers/GameState");
+//var gameState = new GameState();
+var gameState = require("./controllers/GameState");
 
 const app = express();
 app.use(function(req, res, next) {
