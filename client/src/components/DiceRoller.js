@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { connect } from "react-redux";
 
-import { rollDice, closeTool } from '../actions';
+import { rollDice } from '../actions/chatActions';
+import { closeTool } from '../actions/uiActions';
 import { roll } from '../utils/random';
 
 
@@ -76,6 +77,7 @@ class DiceRoller extends Component {
 		}
 
 		this.props.rollDice("d" + diceType, this.state.diceNum, rolls, total);
+		this.props.closeTool("DiceRoller");
 	}
 
 
@@ -146,6 +148,6 @@ class DiceRoller extends Component {
 
 
 export default connect(
-	state => ({ isOpen: state.isDiceRollerOpen }),
+	state => ({ isOpen: state.ui.isDiceRollerOpen }),
 	{ rollDice, closeTool }
 )(DiceRoller);

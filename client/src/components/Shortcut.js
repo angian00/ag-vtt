@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { runTool } from '../actions';
+import { openTool } from '../actions/uiActions';
 
 
 let actions = null;
@@ -12,7 +12,7 @@ const shortcuts = {
 		if (event.key !== 'r')
 			return false;
 		
-		actions.runTool("DiceRoller");
+		actions.openTool("DiceRoller");
 		return true;
 	},
 
@@ -61,15 +61,7 @@ class Shortcut extends Component {
 }
 
 
-function mapStateToProps(state) {
-	if (state) {
-		const { viewMetadata } = state || null;
-		return { viewScale: viewMetadata.viewScale };
-	} else
-		return { viewScale: 15 };
-}
-
 export default connect(
-	mapStateToProps,
-	{ runTool }
+	state => ({ viewScale: (state ? state.viewScale : 15) }),
+	{ openTool }
 )(Shortcut);

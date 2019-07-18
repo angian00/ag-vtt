@@ -7,7 +7,7 @@ import FogOfWar from './FogOfWar';
 import MapImage from './MapImage';
 import TokenImage from './TokenImage';
 
-import { moveToken } from '../actions';
+import { moveToken } from '../actions/gameActions';
 
 
 class MapPanel extends Component {
@@ -23,9 +23,6 @@ class MapPanel extends Component {
 	tokenDraggedHandler(tokenId, x, y) {
 		let mapMetadata = this.props.mapMetadata;
 		let viewMetadata = this.props.viewMetadata;
-
-		//console.log("tokenDraggedHandler");
-		//console.log("x=" + x + ", y=" + y);
 
 		const snapToGrid = true; //TODO: move to option/metadata
 		if (snapToGrid) {
@@ -90,7 +87,7 @@ class MapPanel extends Component {
 					</Layer>
 					<Layer>
 						<TokenImage src="/images/dwarf.png" id="dwarf"
-							viewScale={this.props.viewMetadata.viewScale}
+							viewScale={this.props.viewScale}
 							x={tokenPos.x * mapScaleFactor}
 							y={tokenPos.y * mapScaleFactor}
 							drawDecorations={true} 
@@ -103,8 +100,30 @@ class MapPanel extends Component {
 }
 
 
+function computeViewMetadata(mapMetadata, viewScale) {
+	return {
+		mapScaleFactor: viewScale / mapMetadata.mapScale,
+		tileSizePx: viewScale * mapMetadata.tileSizeFt,
+	}
+}
+
+
+function mapStateToProps(state) {
+	if (!state)
+		return {};
+
+	let viewMetadata = computeViewMetadata(state.gameState.mapMetadata, state.ui.viewScale);
+
+	return {
+		...state.gameState,
+		viewMetadata: viewMetadata,
+		viewScale: state.ui.viewScale,
+	};
+		
+}
+
 
 export default connect(
-	state => state || {},
+	mapStateToProps,
 	{ moveToken }
 )(MapPanel);

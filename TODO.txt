@@ -10,14 +10,10 @@
 ### v0.3
 
 - refactoring
-	- integrate in redux
 	- add propTypes declaration to all React components
-	- split reducers
-	- split actions
-	- extract store configuration
+	- spostare logica socket da reducer ad azioni
 
 - load initial state as a sync HTTP req from redux
-- add logout button and player info
 
 
 ### v0.4

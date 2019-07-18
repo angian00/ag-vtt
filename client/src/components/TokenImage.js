@@ -31,6 +31,9 @@ export default class TokenImage extends LoadedImage {
 	componentDidUpdate(oldProps) {
 		super.componentDidUpdate(oldProps);
 
+		if (oldProps === this.props)
+			return;
+
 		if (((this.props.x !== undefined) && (this.props.x !== this.state.x)) 
 			|| ((this.props.y !== undefined) && (this.props.y !== this.state.y)))
 			this.setState({ x: this.props.x, y: this.props.y });

@@ -14,12 +14,15 @@
 
 ### Changed
 - refactoring
-	- split mapMetadata and viewMetadata
 	- converted to FogOfWar and GridLines to functional components
 	- moved LoadedImage, MapImage, TokenImage to their own classes
-	- reduced initialLocalState knowledge to the minimum
 	- redux integration
 		- ChatPanel
+		- LoginPage
+	- reorganization of redux architecture:
+		- state shape
+		- reducers
+		- actions
 
 
 ## [v0.2] - 2019-07-13

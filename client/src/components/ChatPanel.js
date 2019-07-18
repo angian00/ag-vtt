@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { sendChatMessage } from '../actions';
+import { sendChatMessage } from '../actions/chatActions';
 
 
 
