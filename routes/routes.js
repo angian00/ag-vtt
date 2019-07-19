@@ -2,14 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 
-const users = require("../models/users");
 var gameState = require("../controllers/GameState");
+const users = require("../controllers/users");
 
 
 router.get("/", (req, res) => {
 	res.send({ response: "I am alive" }).status(200);
 });
 
+
+router.get("/users", users.getAll);
+router.post("/users/authenticate", users.authenticate);
+
+/*
 router.post("/users/authenticate", (req, res) => {
 	let username = req.body.username;
 	let pwd = req.body.password;
@@ -22,18 +27,12 @@ router.post("/users/authenticate", (req, res) => {
 	else
 		res.status(401).send({ message: "Invalid credentials" });
 });
-
+*/
 
 
 router.get("/gameState", (req, res) => {
 	res.send(gameState).status(200);
 });
 
-/*
-router.get("/users", (req, res) => {
-	//TODO: check saved credentials and roles
-	res.send([{ name: "andrea", role: "player" }, { name: "balera", role: "dm" }]).status(200);
-});
-*/
 
 module.exports = router;

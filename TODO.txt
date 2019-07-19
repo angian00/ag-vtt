@@ -10,6 +10,13 @@
 ### v0.4
 - alert actions
 
+- make game action syncronous
+- move rollDice action logic to the server
+
+- front-end 
+	- register form
+	- reuse user info panel
+	
 - different info visualized for different roles:
 	- gm (can view everything)
 	- own pc
@@ -36,6 +43,8 @@
 
 - favicon etc.
 
+- websocket authentication
+
 - drag decorations with token (to avoid flash after drag ends)
 
 - "add new token" operation
@@ -56,13 +65,14 @@
 - gm tools
 	- handouts
 	- sketches and annotations on map
+	- geometric shapes (cone, square, circle, etc)
 
 - catalog (token/map metadata)
 	- scale factor
 
 - combat
 	- effects (weapons, spells)
-		
+
 
 + line-of-sight occlusion editor
 

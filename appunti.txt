@@ -1,3 +1,58 @@
+## brainstorming ui
+roles:
+	- player
+	- gm
+	- admin (elimina utenti, gestisce library)
+
+
+### pages
+#### user dashboard:
+- your campaigns
+	- as a player
+	- as a gm
+- new campaign
+- last game sessions
+- start session (as a gm)
+- join session (as a player)	
+
+#### campaign details
+- name
+- description
+- players
+	- invite/remove player
+- settings
+- new encounter
+
+#### new campaign
+- edit name/description
+- choose defaults/template
+- invite players
+
+
+#### new encounter
+- name
+- description
+- grid size
+- fog-of-war on/off
+- map image
+- collision map on/off
+
+
+#### encounter editor
+- like GamePage, with TokenLibrary instead of ChatPanel
+- choose defaults/template
+- invite players
+
+#### start session
+- choose char token positions
+
+
+
+## data model
+gameState (key: campaignId) and chatMsg(key: sessionId) are persisted on mongo for performance reasons.
+player/campaign/encounter/session metadata are persisted on relational db (sqlite).
+
+
 ## font awesome
 
 dice-d20

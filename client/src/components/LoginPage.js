@@ -57,6 +57,7 @@ class LoginPage extends React.Component {
 					</div>
 					<div>
 						<button disabled={this.props.loading}>Login</button>
+						<button disabled={this.props.loading}>Register</button>
 						{
 							null
 							//TODO: loading spinner
