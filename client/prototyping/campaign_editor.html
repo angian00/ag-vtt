@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+		<link href="ag-vtt.css" rel="stylesheet">
+
+		<title>AnGian's Virtual Table Top - Campaign Editor</title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			<a class="navbar-brand" href="#">Angian VTT</a>
+
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="user_dashboard.html">User Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Campaign Editor</a>
+					</li>
+				</ul>
+
+				<form class="form-inline my-2 my-lg-0">
+					<div class="navbar-text mr-2">peppedone</div>
+					<img class="mr-2" src="https://picsum.photos/30/30">
+				</form>
+			</div>
+		</nav>
+
+
+		<main role="main" class="container-fluid">
+			<div class="main-title">
+				<h1>Campaign Editor</h1>
+				<p class="lead"></p>
+			</div>
+
+			<p class="text-muted">id #1532541</p>
+
+			<form>
+				<div class="form-group">
+					<label for="cNameField">Campaign Name</label>
+					<input type="email" class="form-control" id="cNameField" aria-describedby="cNameField" value="Clicheria revisited">
+				</div>
+
+				<div class="form-group">
+					<label for="cDescriptionField">Description</label>
+					<textarea class="form-control" id="cDescriptionField" rows="3">A group of bandits has kidnapped the princess just before her wedding. The party's task is to free her!</textarea>
+				</div>
+
+				<button class="btn btn-primary" type="button">Save</button>
+			</form>
+
+			<hr/>
+
+			<div class="row">
+				<div class="col-6">
+					<h2 class="mt-4">Players</h2>
+					<table class="table table-bordered table-dark">
+						<tr>
+							<th>username</th>
+							<th>character</th>
+							<th>avatar</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>diegolo</td>
+							<td>porfi</td>
+							<td>+</td>
+							<td><a href="#">X</a></td>
+						</tr>
+						<tr>
+							<td>diegolo</td>
+							<td>allium</td>
+							<td>+</td>
+							<td><a href="#">X</a></td>
+						</tr>
+						<tr>
+							<td>dariolo</td>
+							<td>lupin</td>
+							<td>+</td>
+							<td><a href="#">X</a></td>
+						</tr>
+						<tr>
+							<td>+</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-6">
+					<h2 class="mt-4">Locations</h2>
+					<table class="table table-bordered table-dark">
+						<tr>
+							<th>name</th>
+							<th>description</th>
+							<th>image</th>
+							<th>scale (px per ft)</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>Troll Cave</td>
+							<td>Lair of the trolls</td>
+							<td>+</td>
+							<td>30</td>
+							<td><a href="#">X</a></td>
+						</tr>
+						<tr>
+							<td>+</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>				
+			</div>
+		</main>
+		
+	</body>
+
+</html>

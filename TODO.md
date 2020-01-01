@@ -4,10 +4,26 @@
 - intermittent problems with snap-to-grid
 - flashing token popup info
 
+? sequelize with react-redux
+
 
 ## Milestones
 
 ### v0.4
+
+- dashboard visual design:
+	- prototyping
+	- css styles
+	- use of Bootstrap or other frameworks
+
+- register user form: reuse user info panel
+	
+- pass along auth tokens
+
+- CRUD campaign/encounter
+
+
+### v0.x
 - alert actions
 
 - make game action syncronous
@@ -35,7 +51,9 @@
 - token rotation (transformer)
 
 
-### v0.x
+
+
+### v0.xx
 
 - web design:
 	- prototyping
